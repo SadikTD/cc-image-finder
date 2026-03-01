@@ -2,7 +2,7 @@
 
 A powerful, browser-based tool to search and download Creative Commons licensed images from multiple sources — all in a single HTML file.
 
-🔗 **Live Demo:** [Visit CC Image Finder](https://YOUR-USERNAME.github.io/cc-image-finder/)
+🔗 **Live Demo:** [Visit CC Image Finder](https://sadiktd.github.io/cc-image-finder/)
 
 ---
 
