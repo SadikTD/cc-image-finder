@@ -184,6 +184,33 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .spi .cpb{padding:3px 8px;border-radius:4px;border:1px solid var(--bd2);background:none;color:var(--t3);font-family:var(--font);font-size:9px;font-weight:600;cursor:pointer;flex-shrink:0}.spi .cpb:hover{background:var(--bg4);color:var(--t1)}
 .spe{text-align:center;padding:30px 16px;color:var(--t4);font-size:12px}
 
+/* Overlay Wizard */
+.ov-bg{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:510;display:none;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(8px)}.ov-bg.open{display:flex}
+.ov-box{max-width:860px;width:100%;max-height:88vh;overflow-y:auto;background:var(--bg1);border:1px solid var(--bd2);border-radius:16px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.ov-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.ov-hdr h3{font-size:16px;font-weight:700;color:var(--t1)}
+.ov-step{font-size:12px;color:var(--t4);margin-bottom:14px;font-weight:500}
+.ov-sites{display:flex;gap:10px;margin-bottom:18px}
+.ov-site{flex:1;padding:16px;border-radius:12px;border:2px solid var(--bd2);background:var(--bg2);cursor:pointer;text-align:center;transition:all .2s;position:relative;overflow:hidden}
+.ov-site:hover{border-color:var(--bd3);background:var(--bg3)}
+.ov-site.on{border-color:var(--accent);background:var(--accent-d)}
+.ov-site b{display:block;font-size:15px;color:var(--t1);margin-bottom:4px}
+.ov-site span{font-size:11px;color:var(--t3)}
+.ov-site .ov-ring{display:inline-block;width:28px;height:28px;border-radius:50%;margin-bottom:6px}
+.ov-srch{display:flex;gap:6px;margin-bottom:14px}
+.ov-srch input{flex:1;background:var(--bg0);border:1px solid var(--bd2);border-radius:8px;padding:9px 12px;color:var(--t1);font-family:var(--font);font-size:13px;outline:none}
+.ov-srch input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-d)}
+.ov-srch button{padding:0 16px;border-radius:8px;border:none;background:var(--accent);color:var(--on-accent);font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer}
+.ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;margin-bottom:14px;max-height:300px;overflow-y:auto}
+.ov-card{position:relative;border-radius:8px;border:2px solid transparent;overflow:hidden;cursor:pointer;aspect-ratio:16/9;background:var(--bg3);transition:all .15s}
+.ov-card:hover{border-color:var(--bd3)}.ov-card.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-d)}
+.ov-card img{width:100%;height:100%;object-fit:cover}
+.ov-card .ov-csb{position:absolute;top:3px;left:3px;font-size:7px;padding:1px 5px;border-radius:3px;font-weight:700;text-transform:uppercase;backdrop-filter:blur(4px)}
+.ov-preview{text-align:center;margin:14px 0}
+.ov-preview img{max-width:100%;max-height:360px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.ov-loading{text-align:center;padding:30px;color:var(--t4);font-size:13px}
+.ov-acts{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.ov-acts button{padding:10px 24px;border-radius:8px;border:none;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer}
+
 .footer{max-width:1680px;margin:0 auto;padding:20px 24px 32px;text-align:center;font-size:12px;color:var(--t4);border-top:1px solid var(--bd1)}.footer a{color:var(--t3)}
 
 /* ═══ TABLET (≤1024px) ═══ */
@@ -269,6 +296,13 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 
   .ctx{min-width:180px}
 
+  .ov-bg{padding:10px;align-items:flex-start;overflow-y:auto}
+  .ov-box{padding:16px;border-radius:12px;max-height:none}
+  .ov-grid{grid-template-columns:repeat(3,1fr)}
+  .ov-sites{flex-direction:column}
+  .ov-acts{flex-wrap:wrap}
+  .ov-acts button{flex:1;min-width:120px}
+
   .footer{padding:16px 12px 24px;font-size:11px}
 }
 
@@ -340,10 +374,47 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 
 <div class="pvbg" id="pvBg" onclick="if(event.target===this)clPv()"><div class="pvbox"><img id="pvI" src=""><div class="pvm"><div class="pvl"><h3 id="pvT"></h3><p id="pvP"></p><div class="pvcr" id="pvC"></div></div><div class="pvr"><button class="ob s" onclick="if(pvIt&&pvIt.pageUrl)window.open(pvIt.pageUrl,'_blank')">🔗 View Source</button><button class="ob s" onclick="cpCr(pvIt)">📋 Credit</button><button class="ob s" id="pvFavBtn" onclick="tgFavI(pvIt);upPvFav()">☆ Fav</button><button class="ob p" onclick="startDL(pvIt)">⬇ Download</button></div></div></div></div>
 
-<div class="fp-bg" id="fpBg"><div class="fp-box"><h3>📍 Set Focal Point</h3><p>Click where the face or key area is. The crop will center around your click.</p><div class="fp-wrap" id="fpWrap"><img id="fpImg" src=""><div class="fp-dot" id="fpDot"></div><div class="fp-cross h" id="fpH"></div><div class="fp-cross v" id="fpV"></div></div><div class="fp-acts"><button class="fp-sk" onclick="fpSkip()">Skip (center)</button><button class="fp-cn" onclick="fpCancel()">Cancel</button><button class="fp-dl" id="fpDlBtn" onclick="fpConfirm()" disabled>Crop & Download</button></div></div></div>
+<div class="fp-bg" id="fpBg"><div class="fp-box"><h3>📍 Set Focal Point</h3><p>Click where the face or key area is. The crop will center around your click.</p><div class="fp-wrap" id="fpWrap"><img id="fpImg" src=""><div class="fp-dot" id="fpDot"></div><div class="fp-cross h" id="fpH"></div><div class="fp-cross v" id="fpV"></div></div><div class="fp-acts"><button class="fp-sk" onclick="fpSkip()">Skip (center)</button><button class="fp-cn" onclick="fpCancel()">Cancel</button><button class="fp-dl" id="fpDlBtn" onclick="fpConfirm()" disabled>Crop & Download</button><button class="fp-dl" id="fpOvBtn" onclick="fpOverlay()" disabled style="background:#7c3aed;color:#fff">🔲 Add Overlay</button></div></div></div>
+
+<div class="ov-bg" id="ovBg" onclick="if(event.target===this)ovClose()"><div class="ov-box">
+<div class="ov-hdr"><h3 id="ovTitle">🔲 Add Overlay Image</h3><button class="mc" onclick="ovClose()">×</button></div>
+
+<div id="ovStep1">
+<div class="ov-step">Step 1 — Choose the site this image is for:</div>
+<div class="ov-sites">
+<div class="ov-site" onclick="pickOvSite('wgtc')">
+<div class="ov-ring" style="border:4px solid #FE761E"></div>
+<b>WGTC</b><span>Orange ring</span>
+</div>
+<div class="ov-site" onclick="pickOvSite('aotf')">
+<div class="ov-ring" style="background:conic-gradient(#2861B2 0deg 90deg,#DE1342 90deg 180deg,#F1F807 180deg 270deg,#2F8A0A 270deg 360deg);"></div>
+<b>AOTF</b><span>4-color ring</span>
+</div>
+</div>
+</div>
+
+<div id="ovStep2" style="display:none">
+<div class="ov-step">Step 2 — Search for the overlay image (the person in the circle):</div>
+<div class="ov-srch"><input type="text" id="ovSIn" placeholder="Search for overlay image..." autocomplete="off"><button onclick="ovDoSearch()">Search</button></div>
+<div id="ovResults"><div class="ov-loading">Search for a person or topic above</div></div>
+</div>
+
+<div id="ovStep3" style="display:none">
+<div class="ov-step">Step 3 — Click the face/center of the person for the circular crop:</div>
+<div style="text-align:center"><div class="fp-wrap" id="ovFpWrap" style="display:inline-block;cursor:crosshair"><img id="ovFpImg" src="" style="max-width:100%;max-height:50vh;border-radius:8px;display:block"><div class="fp-dot" id="ovFpDot"></div><div class="fp-cross h" id="ovFpH"></div><div class="fp-cross v" id="ovFpV"></div></div></div>
+<div class="ov-acts"><button style="background:rgba(255,255,255,.12);color:var(--t2)" onclick="ovBackToSearch()">← Back</button><button id="ovCompBtn" style="background:#7c3aed;color:#fff" onclick="ovCompose()" disabled>Generate Preview</button></div>
+</div>
+
+<div id="ovStep4" style="display:none">
+<div class="ov-step">Step 4 — Preview your combined image:</div>
+<div class="ov-preview"><img id="ovPvImg" src=""></div>
+<div class="ov-acts"><button style="background:rgba(255,255,255,.12);color:var(--t2)" onclick="ovBackToFP()">← Back</button><button style="background:#e8a832;color:#000" onclick="ovDownload()">⬇ Download Combined Image</button></div>
+</div>
+
+</div></div>
 
 <div class="mbg" id="sBg" onclick="if(event.target===this)tgSet()"><div class="modal"><div class="mh"><h2>⚙️ Settings</h2><button class="mc" onclick="tgSet()">×</button></div>
-<div class="stabs"><div class="stab on" onclick="sTab(0)">General</div><div class="stab" onclick="sTab(1)">API Keys</div><div class="stab" onclick="sTab(2)">Advanced</div></div>
+<div class="stabs"><div class="stab on" onclick="sTab(0)">General</div><div class="stab" onclick="sTab(1)" id="apiTab" style="display:none">API Keys</div><div class="stab" onclick="sTab(2)">Advanced</div></div>
 <div class="stc on" id="st0">
 <div class="fg"><h3>📐 Image Output</h3><div style="display:flex;gap:10px"><div class="fl" style="flex:1"><label>Width</label><input type="number" id="cW" value="1200"></div><div class="fl" style="flex:1"><label>Height</label><input type="number" id="cH" value="675"></div><div class="fl" style="flex:1"><label>Quality</label><input type="number" id="cQ" value="92" min="1" max="100"></div></div></div>
 <div class="fg"><h3>📝 Filename</h3><div class="fl"><input type="text" id="cFn" value="{query}_{source}_{timestamp}"><div class="ht">{query} {source} {creator} {date} {timestamp} {title}</div></div></div>
@@ -367,7 +438,6 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 <div class="fl"><label>Pexels</label><input type="text" id="cPe" placeholder="Key"><div class="ht"><a href="https://www.pexels.com/api/" target="_blank">Get free key</a></div></div>
 </div></div>
 <div class="stc" id="st2">
-<div class="fg"><h3>🌐 CORS Proxy</h3><div class="fl"><input type="text" id="cPr" placeholder="https://api.allorigins.win/raw?url="><div class="ht">For Openverse when running as local HTML file</div></div></div>
 <div class="fg"><h3>🗃 Data</h3><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="spb" onclick="expCr()">📄 Export Credits</button><button class="spb" onclick="expFv()">⭐ Export Favs</button><button class="spb" onclick="if(confirm('Reset ALL?')){localStorage.clear();location.reload()}">🗑 Reset</button></div></div>
 </div>
 <button class="svb" onclick="saveCfg()">Save Settings</button>
@@ -381,6 +451,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 <div style="margin-bottom:18px"><b style="font-size:14px;color:var(--t1)">⬇ Downloading</b><br>Click "Download & Resize" on any image. If focal point is enabled, you'll get to click where the face or important area is before cropping. Images are auto-resized to your configured dimensions (default 1200×675). Credit text is auto-copied to your clipboard.</div>
 <div style="margin-bottom:18px"><b style="font-size:14px;color:var(--t1)">📋 Using Credits</b><br>Every download auto-copies the proper attribution text. Open the Credits Log (📄 icon) to see all credits from this session. Use "Copy All" or "Export" to save them as a .txt file.</div>
 <div style="margin-bottom:18px"><b style="font-size:14px;color:var(--t1)">📍 Focal Point</b><br>When enabled in Settings, you can click on a face or key area before the crop happens. The image will be resized around your chosen center point so nothing important gets cut off.</div>
+<div style="margin-bottom:18px"><b style="font-size:14px;color:var(--t1)">🔲 Overlay Combiner</b><br>After setting the focal point, click "Add Overlay" to combine two images. Choose WGTC (orange ring) or AOTF (4-color ring), search for the overlay person, set their focal point, preview the result, and download. Both credits are saved automatically.</div>
 <div style="margin-bottom:18px"><b style="font-size:14px;color:var(--t1)">📝 Custom Filenames</b><br>Go to Settings → Filename to set a template. Variables: {query}, {title}, {source}, {creator}, {date}, {timestamp}. Default: "CC {title} - {source}" produces "CC President Donald Trump - wikimedia.jpg".</div>
 <div style="margin-bottom:18px"><b style="font-size:14px;color:var(--t1)">☑ Bulk Select</b><br>Click the checkbox on image cards (bottom-right corner) to select multiple images. Then use the toolbar to download all or copy all credits at once.</div>
 <div style="margin-bottom:18px"><b style="font-size:14px;color:var(--t1)">⭐ Favorites</b><br>Click the ★ icon on any image to save it to Favorites. Access them anytime from the ⭐ toolbar button. Favorites are saved in your browser.</div>
@@ -394,7 +465,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 <span style="display:inline-block;background:var(--bg3);border:1px solid var(--bd2);border-radius:4px;padding:1px 6px;font-family:var(--mono);font-size:11px;margin:2px">F</span> Favorite &nbsp;
 <span style="display:inline-block;background:var(--bg3);border:1px solid var(--bd2);border-radius:4px;padding:1px 6px;font-family:var(--mono);font-size:11px;margin:2px">Space</span> Select &nbsp;
 <span style="display:inline-block;background:var(--bg3);border:1px solid var(--bd2);border-radius:4px;padding:1px 6px;font-family:var(--mono);font-size:11px;margin:2px">Esc</span> Close</div>
-<div style="margin-bottom:18px"><b style="font-size:14px;color:var(--t1)">🔑 API Keys</b><br>Most sources need a free API key. Go to Settings → API Keys to add yours. Wikimedia Commons works without any key. Keys are stored locally in your browser and never sent to any third party.</div>
+<div style="margin-bottom:18px"><b style="font-size:14px;color:var(--t1)">🔑 API Keys</b><br>API keys are managed by the admin. Press <span style="display:inline-block;background:var(--bg3);border:1px solid var(--bd2);border-radius:4px;padding:1px 6px;font-family:var(--mono);font-size:11px">Ctrl+Shift+A</span> to unlock the API Keys tab in Settings. Wikimedia Commons works without any key. Keys are stored locally in your browser.</div>
 <div><b style="font-size:14px;color:var(--t1)">📂 6 Sources</b><br>
 <b style="color:var(--src-ov)">Openverse</b> — 700M+ CC-licensed images from across the web<br>
 <b style="color:var(--src-wc)">Wikimedia</b> — 130M+ free media files, no API key needed<br>
@@ -411,8 +482,8 @@ let R=[],sel=new Set(),favs=JSON.parse(localStorage.getItem('ccf3_fav')||'[]'),h
 const DF={w:1200,h:675,q:92,fname:'CC {title} - {source}',grid:'md',pp:24,ts:1.2,autoCopy:true,showQueue:true,focalPt:true,keyNav:true,sounds:true,ovId:'ASNPpk95QGPW2ormSArvmF236ch86UGTCejQ6jUq',ovSe:'Vcuuig4u4Ko54LgIpoWHXMuN7jBzX0BmRIbR6olz8tUUgcEdaC6arzJhYHa8HQXmlAh8qaO7gcTCSZnbcetigzWJ2u4oostbjwoa9bWh53Ypg0LxG2EF1I2fGwCBN7Qs',flickr:'',unsplash:'CyjNsVR2HuaqBjd7jmXoGNe1vWx9mFs3eQ4iXmJ1DLI',pixabay:'26012254-d290bc9cecaa90b7a640eebc2',pexels:'gUnwVZRjJgutUJxAtmO4p52qVFmhRwAFgG6ksiubABPBkQKZ7QP0Ivfd',proxy:'https://api.allorigins.win/raw?url=',theme:'dark'};
 function G(){const r=localStorage.getItem('ccf3_cfg');return r?{...DF,...JSON.parse(r)}:{...DF}}
 function S(c){localStorage.setItem('ccf3_cfg',JSON.stringify(c))}
-function loadCfg(){const c=G();$('cW').value=c.w;$('cH').value=c.h;$('cQ').value=c.q;$('cFn').value=c.fname;$('cGr').value=c.grid;$('cPp').value=c.pp;$('cTs').value=c.ts||1;$('cAC').checked=c.autoCopy;$('cSQ').checked=c.showQueue;$('cFP').checked=c.focalPt;$('cKN').checked=c.keyNav;$('cSn').checked=c.sounds;$('cOI').value=c.ovId||'';$('cOS').value=c.ovSe||'';$('cFl').value=c.flickr||'';$('cUn').value=c.unsplash||'';$('cPx').value=c.pixabay||'';$('cPe').value=c.pexels||'';$('cPr').value=c.proxy||'';apT(c.theme);apG(c.grid);apTs(c.ts||1);upCK()}
-function saveCfg(){const c={w:+$('cW').value||1200,h:+$('cH').value||675,q:+$('cQ').value||92,fname:$('cFn').value||DF.fname,grid:$('cGr').value,pp:+$('cPp').value||24,ts:+$('cTs').value||1,autoCopy:$('cAC').checked,showQueue:$('cSQ').checked,focalPt:$('cFP').checked,keyNav:$('cKN').checked,sounds:$('cSn').checked,ovId:$('cOI').value.trim(),ovSe:$('cOS').value.trim(),flickr:$('cFl').value.trim(),unsplash:$('cUn').value.trim(),pixabay:$('cPx').value.trim(),pexels:$('cPe').value.trim(),proxy:$('cPr').value.trim(),theme:document.documentElement.getAttribute('data-theme')};S(c);apG(c.grid);apTs(c.ts);upCK();ovTk=null;tgSet();toast('Settings saved!','ok')}
+function loadCfg(){const c=G();$('cW').value=c.w;$('cH').value=c.h;$('cQ').value=c.q;$('cFn').value=c.fname;$('cGr').value=c.grid;$('cPp').value=c.pp;$('cTs').value=c.ts||1;$('cAC').checked=c.autoCopy;$('cSQ').checked=c.showQueue;$('cFP').checked=c.focalPt;$('cKN').checked=c.keyNav;$('cSn').checked=c.sounds;$('cOI').value=c.ovId||'';$('cOS').value=c.ovSe||'';$('cFl').value=c.flickr||'';$('cUn').value=c.unsplash||'';$('cPx').value=c.pixabay||'';$('cPe').value=c.pexels||'';apT(c.theme);apG(c.grid);apTs(c.ts||1);upCK()}
+function saveCfg(){const c={w:+$('cW').value||1200,h:+$('cH').value||675,q:+$('cQ').value||92,fname:$('cFn').value||DF.fname,grid:$('cGr').value,pp:+$('cPp').value||24,ts:+$('cTs').value||1,autoCopy:$('cAC').checked,showQueue:$('cSQ').checked,focalPt:$('cFP').checked,keyNav:$('cKN').checked,sounds:$('cSn').checked,ovId:$('cOI').value.trim(),ovSe:$('cOS').value.trim(),flickr:$('cFl').value.trim(),unsplash:$('cUn').value.trim(),pixabay:$('cPx').value.trim(),pexels:$('cPe').value.trim(),proxy:DF.proxy,theme:document.documentElement.getAttribute('data-theme')};S(c);apG(c.grid);apTs(c.ts);upCK();ovTk=null;tgSet();toast('Settings saved!','ok')}
 function upCK(){const c=G();document.querySelectorAll('.chip:not(.chip-all)').forEach(ch=>{const s=ch.dataset.src;if(s==='openverse'){ch.classList.toggle('nokey',!c.ovId);return}if(s==='wikimedia'){ch.classList.remove('nokey');return}ch.classList.toggle('nokey',!c[s])})}
 function apG(s){$('grid').className='grid '+s}
 function apTs(v){document.documentElement.style.setProperty('--fs',v)}
@@ -441,9 +512,9 @@ function esc(t){if(!t)return'';const d=document.createElement('div');d.textConte
 function render(){const g=$('grid');g.innerHTML='';R.forEach((it,i)=>{const d=document.createElement('div');d.className='card';d.id='c'+i;d.tabIndex=0;if(sel.has(i))d.classList.add('sel');if(hist.some(h=>h.full===it.full))d.classList.add('dld');if(favs.some(f=>f.full===it.full))d.classList.add('fav');d.innerHTML=`<div class="thumb"><img src="${esc(it.thumb)}" alt="${esc(it.title)}" loading="lazy" onerror="this.style.opacity=0.3"><span class="sb sb-${it.src.toLowerCase()}">${it.src}</span><span class="lb">${esc(it.lic)}</span><span class="dlc">✓</span><button class="fs" onclick="event.stopPropagation();tgFavI(R[${i}]);this.closest('.card').classList.toggle('fav')">★</button><div class="cov"><div class="ovr"><button class="ob p" onclick="event.stopPropagation();startDL(R[${i}])">⬇ Download & Resize</button></div><div class="ovr"><button class="ob s" onclick="event.stopPropagation();cpCr(R[${i}])">📋 Credit</button><button class="ob s" onclick="event.stopPropagation();opPv(R[${i}])">👁 Preview</button><button class="ob s" onclick="event.stopPropagation();window.open(R[${i}].pageUrl,'_blank')">🔗</button></div></div><div class="csel" onclick="event.stopPropagation();tgSel(${i})">✓</div></div><div class="ci"><div class="ct" title="${esc(it.title)}">${esc(it.title)}</div><div class="cm">by ${esc(it.creator)}${it.w?' · '+it.w+'×'+it.h:''}</div></div>`;d.addEventListener('click',()=>opPv(it));d.addEventListener('contextmenu',e=>{e.preventDefault();showCtx(e,i)});g.appendChild(d)})}
 
 /* Focal Point */
-let fpX=.5,fpY=.5;
-$('fpWrap').addEventListener('click',e=>{const r=$('fpImg').getBoundingClientRect();fpX=(e.clientX-r.left)/r.width;fpY=(e.clientY-r.top)/r.height;fpX=Math.max(0,Math.min(1,fpX));fpY=Math.max(0,Math.min(1,fpY));const d=$('fpDot');d.style.display='block';d.style.left=(fpX*100)+'%';d.style.top=(fpY*100)+'%';$('fpH').style.display='block';$('fpH').style.top=(fpY*100)+'%';$('fpV').style.display='block';$('fpV').style.left=(fpX*100)+'%';$('fpDlBtn').disabled=false});
-function showFP(it){return new Promise(res=>{fpRes=res;fpX=.5;fpY=.5;$('fpImg').src=it.full||it.thumb;$('fpDot').style.display='none';$('fpH').style.display='none';$('fpV').style.display='none';$('fpDlBtn').disabled=true;$('fpBg').classList.add('open')})}
+let fpX=.5,fpY=.5,fpItem=null;
+$('fpWrap').addEventListener('click',e=>{const r=$('fpImg').getBoundingClientRect();fpX=(e.clientX-r.left)/r.width;fpY=(e.clientY-r.top)/r.height;fpX=Math.max(0,Math.min(1,fpX));fpY=Math.max(0,Math.min(1,fpY));const d=$('fpDot');d.style.display='block';d.style.left=(fpX*100)+'%';d.style.top=(fpY*100)+'%';$('fpH').style.display='block';$('fpH').style.top=(fpY*100)+'%';$('fpV').style.display='block';$('fpV').style.left=(fpX*100)+'%';$('fpDlBtn').disabled=false;$('fpOvBtn').disabled=false});
+function showFP(it){return new Promise(res=>{fpRes=res;fpItem=it;fpX=.5;fpY=.5;$('fpImg').src=it.full||it.thumb;$('fpDot').style.display='none';$('fpH').style.display='none';$('fpV').style.display='none';$('fpDlBtn').disabled=true;$('fpOvBtn').disabled=true;$('fpBg').classList.add('open')})}
 function fpConfirm(){$('fpBg').classList.remove('open');if(fpRes)fpRes({x:fpX,y:fpY})}
 function fpSkip(){$('fpBg').classList.remove('open');if(fpRes)fpRes({x:.5,y:.5})}
 function fpCancel(){$('fpBg').classList.remove('open');if(fpRes)fpRes(null)}
@@ -493,7 +564,7 @@ function addSH(q){sHist=sHist.filter(s=>s!==q);sHist.unshift(q);if(sHist.length>
 function rnSH(){const el=$('sH');if(!sHist.length){el.classList.remove('open');return}el.innerHTML=`<div class="sh-h"><span>Recent</span><button class="sh-c" onclick="event.stopPropagation();sHist=[];localStorage.setItem('ccf3_sh','[]');clSH()">Clear</button></div>`+sHist.slice(0,10).map(s=>`<div class="sh-i" onclick="document.getElementById('sIn').value='${esc(s)}';clSH();doSearch()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${esc(s)}</div>`).join('');el.classList.add('open')}
 function clSH(){$('sH').classList.remove('open')}
 
-document.addEventListener('keydown',e=>{const c=G();if(e.key==='Escape'){clPv();if($('sBg').classList.contains('open'))tgSet();if($('crP').classList.contains('open'))tgCred();if($('fvP').classList.contains('open'))tgFav();if($('tipP').classList.contains('open'))tgTips();if($('fpBg').classList.contains('open'))fpCancel();clSH();clSg();$('ctx').classList.remove('open');return}if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();$('sIn').focus();$('sIn').select();return}if(document.activeElement===$('sIn')&&$('sG').classList.contains('open')){const items=$('sG').querySelectorAll('.sg-i');if(e.key==='ArrowDown'){e.preventDefault();sgIdx=Math.min(sgIdx+1,items.length-1);items.forEach((el,i)=>el.classList.toggle('active',i===sgIdx));return}if(e.key==='ArrowUp'){e.preventDefault();sgIdx=Math.max(sgIdx-1,-1);items.forEach((el,i)=>el.classList.toggle('active',i===sgIdx));if(sgIdx===-1)return;return}if(e.key==='Enter'){e.preventDefault();if(sgIdx>=0&&items[sgIdx]){$('sIn').value=items[sgIdx].textContent.trim()}clSg();doSearch();return}if(e.key==='Escape'){clSg();return}}if(document.activeElement===$('sIn')&&e.key==='Enter'){clSg();doSearch();return}if(!c.keyNav||!R.length||$('pvBg').classList.contains('open')||$('sBg').classList.contains('open')||$('fpBg').classList.contains('open'))return;const cols=Math.round($('grid').clientWidth/270)||3;if(e.key==='ArrowRight'){e.preventDefault();kbN(kbI+1)}else if(e.key==='ArrowLeft'){e.preventDefault();kbN(kbI-1)}else if(e.key==='ArrowDown'){e.preventDefault();kbN(kbI+cols)}else if(e.key==='ArrowUp'){e.preventDefault();kbN(kbI-cols)}else if(e.key==='d'&&kbI>=0)startDL(R[kbI]);else if(e.key==='c'&&kbI>=0)cpCr(R[kbI]);else if(e.key==='Enter'&&kbI>=0)opPv(R[kbI]);else if(e.key===' '&&kbI>=0){e.preventDefault();tgSel(kbI)}else if(e.key==='f'&&kbI>=0){tgFavI(R[kbI]);const cd=$('c'+kbI);if(cd)cd.classList.toggle('fav')}});
+document.addEventListener('keydown',e=>{const c=G();if(e.key==='Escape'){clPv();if($('ovBg').classList.contains('open'))ovClose();if($('sBg').classList.contains('open'))tgSet();if($('crP').classList.contains('open'))tgCred();if($('fvP').classList.contains('open'))tgFav();if($('tipP').classList.contains('open'))tgTips();if($('fpBg').classList.contains('open'))fpCancel();clSH();clSg();$('ctx').classList.remove('open');return}if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.key==='A'){e.preventDefault();const t=$('apiTab');t.style.display=t.style.display==='none'?'':'none';toast(t.style.display==='none'?'API Keys tab hidden':'API Keys tab unlocked!','info');return}if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();$('sIn').focus();$('sIn').select();return}if(document.activeElement===$('sIn')&&$('sG').classList.contains('open')){const items=$('sG').querySelectorAll('.sg-i');if(e.key==='ArrowDown'){e.preventDefault();sgIdx=Math.min(sgIdx+1,items.length-1);items.forEach((el,i)=>el.classList.toggle('active',i===sgIdx));return}if(e.key==='ArrowUp'){e.preventDefault();sgIdx=Math.max(sgIdx-1,-1);items.forEach((el,i)=>el.classList.toggle('active',i===sgIdx));if(sgIdx===-1)return;return}if(e.key==='Enter'){e.preventDefault();if(sgIdx>=0&&items[sgIdx]){$('sIn').value=items[sgIdx].textContent.trim()}clSg();doSearch();return}if(e.key==='Escape'){clSg();return}}if(document.activeElement===$('sIn')&&e.key==='Enter'){clSg();doSearch();return}if(!c.keyNav||!R.length||$('pvBg').classList.contains('open')||$('sBg').classList.contains('open')||$('fpBg').classList.contains('open'))return;const cols=Math.round($('grid').clientWidth/270)||3;if(e.key==='ArrowRight'){e.preventDefault();kbN(kbI+1)}else if(e.key==='ArrowLeft'){e.preventDefault();kbN(kbI-1)}else if(e.key==='ArrowDown'){e.preventDefault();kbN(kbI+cols)}else if(e.key==='ArrowUp'){e.preventDefault();kbN(kbI-cols)}else if(e.key==='d'&&kbI>=0)startDL(R[kbI]);else if(e.key==='c'&&kbI>=0)cpCr(R[kbI]);else if(e.key==='Enter'&&kbI>=0)opPv(R[kbI]);else if(e.key===' '&&kbI>=0){e.preventDefault();tgSel(kbI)}else if(e.key==='f'&&kbI>=0){tgFavI(R[kbI]);const cd=$('c'+kbI);if(cd)cd.classList.toggle('fav')}});
 function kbN(i){if(i<0)i=0;if(i>=R.length)i=R.length-1;if(kbI>=0){const p=$('c'+kbI);if(p)p.classList.remove('kf')}kbI=i;const el=$('c'+kbI);if(el){el.classList.add('kf');el.scrollIntoView({block:'nearest',behavior:'smooth'})}}
 
 function tgSet(){$('sBg').classList.toggle('open')}
@@ -505,6 +576,31 @@ function pickSg(el){const v=el?.dataset?.val||el?.textContent?.trim()||'';if(!v)
 function clSg(){$('sG').classList.remove('open');sgIdx=-1}
 function toast(msg,type='info'){const c=$('toasts'),t=document.createElement('div');t.className=`toast t-${type}`;const ic={ok:'✓',err:'✕',info:'ℹ'};t.innerHTML=`<span style="font-size:14px">${ic[type]||'ℹ'}</span><span>${esc(msg)}</span>`;c.appendChild(t);setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),300)},4000)}
 $('sIn').addEventListener('focus',()=>{const v=$('sIn').value;if(v.length>=2)fetchSg(v);else rnSH()});$('sIn').addEventListener('input',()=>{const v=$('sIn').value;if(v.length>=2){clSH();clearTimeout(sgTimer);sgTimer=setTimeout(()=>fetchSg(v),200)}else{clSg();v.length?clSH():rnSH()}});document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap')){clSH();clSg()}});
+/* Overlay Wizard */
+let ovMainIt=null,ovMainFP=null,ovSiteType='',ovR=[],ovSelIt=null,ovFpX=.5,ovFpY=.5,ovBlob=null;
+function fpOverlay(){ovMainIt=fpItem;ovMainFP={x:fpX,y:fpY};$('fpBg').classList.remove('open');if(fpRes)fpRes(null);ovShowStep(1);document.querySelectorAll('.ov-site').forEach(s=>s.classList.remove('on'));$('ovBg').classList.add('open')}
+function ovClose(){$('ovBg').classList.remove('open');ovBlob=null}
+function ovShowStep(n){for(let i=1;i<=4;i++)$('ovStep'+i).style.display=i===n?'block':'none';$('ovTitle').textContent=n===1?'🔲 Add Overlay Image':n===2?'🔲 Search Overlay':n===3?'🔲 Set Overlay Focal Point':'🔲 Preview Combined Image'}
+function pickOvSite(t){ovSiteType=t;document.querySelectorAll('.ov-site').forEach(s=>s.classList.remove('on'));event.currentTarget.classList.add('on');ovShowStep(2);$('ovSIn').value='';$('ovResults').innerHTML='<div class="ov-loading">Search for a person or topic above</div>';setTimeout(()=>$('ovSIn').focus(),100)}
+$('ovSIn').addEventListener('keydown',e=>{if(e.key==='Enter')ovDoSearch()});
+async function ovDoSearch(){const q=$('ovSIn').value.trim();if(!q)return;$('ovResults').innerHTML='<div class="ov-loading"><div class="spin"></div>Searching...</div>';const c=G(),pp=12;const res=await Promise.allSettled([srcOV(q,1,pp),srcWC(q,1,pp),srcFL(q,c.flickr,1,pp),srcUN(q,c.unsplash,1,pp),srcPX(q,c.pixabay,1,pp),srcPE(q,c.pexels,1,pp)]);ovR=[];for(const r of res)if(r.status==='fulfilled')ovR.push(...r.value);if(!ovR.length){$('ovResults').innerHTML='<div class="ov-loading">No results found. Try different terms.</div>';return}$('ovResults').innerHTML='<div class="ov-grid">'+ovR.map((it,i)=>`<div class="ov-card" onclick="ovPickImg(${i})" id="ovc${i}"><img src="${esc(it.thumb)}" loading="lazy" onerror="this.style.opacity=.3"><span class="ov-csb sb-${it.src.toLowerCase()}">${it.src}</span></div>`).join('')+'</div>'}
+function ovPickImg(i){ovSelIt=ovR[i];document.querySelectorAll('.ov-card').forEach(c=>c.classList.remove('on'));$('ovc'+i).classList.add('on');ovFpX=.5;ovFpY=.5;$('ovFpImg').src=ovSelIt.full||ovSelIt.thumb;$('ovFpDot').style.display='none';$('ovFpH').style.display='none';$('ovFpV').style.display='none';$('ovCompBtn').disabled=true;ovShowStep(3)}
+$('ovFpWrap').addEventListener('click',e=>{const r=$('ovFpImg').getBoundingClientRect();ovFpX=(e.clientX-r.left)/r.width;ovFpY=(e.clientY-r.top)/r.height;ovFpX=Math.max(0,Math.min(1,ovFpX));ovFpY=Math.max(0,Math.min(1,ovFpY));$('ovFpDot').style.display='block';$('ovFpDot').style.left=(ovFpX*100)+'%';$('ovFpDot').style.top=(ovFpY*100)+'%';$('ovFpH').style.display='block';$('ovFpH').style.top=(ovFpY*100)+'%';$('ovFpV').style.display='block';$('ovFpV').style.left=(ovFpX*100)+'%';$('ovCompBtn').disabled=false});
+function ovBackToSearch(){ovShowStep(2)}
+function ovBackToFP(){ovShowStep(3)}
+function ovCompose(){$('ovCompBtn').disabled=true;$('ovCompBtn').textContent='Generating...';const c=G();const mainImg=new Image();mainImg.crossOrigin='anonymous';mainImg.onload=()=>{const ovImg=new Image();ovImg.crossOrigin='anonymous';ovImg.onload=()=>{const tw=c.w||1200,th=c.h||675;const cv=document.createElement('canvas');cv.width=tw;cv.height=th;const ctx=cv.getContext('2d');
+/* Draw main image with focal point crop */
+const mfp=ovMainFP||{x:.5,y:.5};const tr=tw/th,ir=mainImg.width/mainImg.height;let sx,sy,sw,sh;if(ir>tr){sh=mainImg.height;sw=sh*tr;sy=0;sx=mfp.x*mainImg.width-sw/2;sx=Math.max(0,Math.min(mainImg.width-sw,sx))}else{sw=mainImg.width;sh=sw/tr;sx=0;sy=mfp.y*mainImg.height-sh/2;sy=Math.max(0,Math.min(mainImg.height-sh,sy))}ctx.drawImage(mainImg,sx,sy,sw,sh,0,0,tw,th);
+/* Draw circular overlay */
+const circR=Math.round(tw*0.09);const border=Math.round(circR*0.08);const cx=tw-circR-Math.round(tw*0.03);const cy=circR+Math.round(th*0.05);
+/* Draw colored border ring */
+ctx.save();if(ovSiteType==='wgtc'){ctx.beginPath();ctx.arc(cx,cy,circR+border,0,Math.PI*2);ctx.fillStyle='#FE761E';ctx.fill()}else{const colors=['#2861B2','#2F8A0A','#F1F807','#DE1342'];for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,circR+border,-Math.PI/2+i*Math.PI/2,-Math.PI/2+(i+1)*Math.PI/2);ctx.closePath();ctx.fillStyle=colors[i];ctx.fill()}}
+/* Clip and draw overlay image */
+ctx.beginPath();ctx.arc(cx,cy,circR,0,Math.PI*2);ctx.clip();
+const oR=ovImg.width/ovImg.height;let osx,osy,osw,osh;if(oR>1){osh=ovImg.height;osw=osh;osy=0;osx=ovFpX*ovImg.width-osw/2;osx=Math.max(0,Math.min(ovImg.width-osw,osx))}else{osw=ovImg.width;osh=osw;osx=0;osy=ovFpY*ovImg.height-osh/2;osy=Math.max(0,Math.min(ovImg.height-osh,osy))}ctx.drawImage(ovImg,osx,osy,osw,osh,cx-circR,cy-circR,circR*2,circR*2);ctx.restore();
+cv.toBlob(blob=>{ovBlob=blob;$('ovPvImg').src=URL.createObjectURL(blob);$('ovCompBtn').disabled=false;$('ovCompBtn').textContent='Generate Preview';ovShowStep(4)},'image/jpeg',(c.q||92)/100)};ovImg.onerror=()=>{toast('Failed to load overlay image','err');$('ovCompBtn').disabled=false;$('ovCompBtn').textContent='Generate Preview'};ovImg.src=(ovSelIt.full||ovSelIt.thumb)+(ovSelIt.full?.includes('?')?'&':'?')+'_t='+Date.now()};mainImg.onerror=()=>{toast('Failed to load main image','err');$('ovCompBtn').disabled=false;$('ovCompBtn').textContent='Generate Preview'};mainImg.src=(ovMainIt.full||ovMainIt.thumb)+(ovMainIt.full?.includes('?')?'&':'?')+'_t='+Date.now()}
+async function ovDownload(){if(!ovBlob)return;const c=G();const fn=mkN(ovMainIt);const a=document.createElement('a');a.href=URL.createObjectURL(ovBlob);a.download=fn;a.click();URL.revokeObjectURL(a.href);if(c.autoCopy){const cr=ovMainIt.credit+(ovSelIt?' | Overlay: '+ovSelIt.credit:'');await clip(cr)}addH(ovMainIt);addSCr(ovMainIt);if(ovSelIt)addSCr(ovSelIt);sDL++;upDL();mDL(ovMainIt);if(c.sounds)ding();toast(`Saved "${fn}" — combined image!`,'ok');ovClose()}
+
 loadCfg();rnFv();rnCr();
 </script>
 </body>
