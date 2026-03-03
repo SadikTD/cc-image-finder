@@ -1,69 +1,118 @@
 # 📸 CC Image Finder
 
-A powerful, browser-based tool to search and download Creative Commons licensed images from multiple sources — all in a single HTML file.
+A browser-based tool that searches **6 free image sources simultaneously**, auto-resizes images, generates proper attribution, and downloads — all in one click. Built for content teams who need CC-licensed images fast.
 
-🔗 **Live Demo:** [Visit CC Image Finder](https://sadiktd.github.io/cc-image-finder/)
+🔗 **Live:** [sadiktd.github.io/cc-image-finder](https://sadiktd.github.io/cc-image-finder/)
 
 ---
 
 ## ✨ Features
 
-- **Multi-source search** — Search across Openverse, Flickr, Unsplash, Pixabay, and Pexels simultaneously
-- **Auto-resize & crop** — Download images resized to your custom dimensions (default 1200×675)
-- **Focal point picker** — Click on the face or key area before cropping so nothing important gets cut off
-- **Auto credit copy** — Attribution text is copied to your clipboard on every download
-- **Custom filenames** — Use template variables like `{query}`, `{source}`, `{creator}`, `{date}`
-- **Dark & light themes** — Toggle between dark and light mode
-- **Favorites** — Star images and access them anytime
-- **Bulk operations** — Select multiple images and download or copy all credits at once
-- **Keyboard navigation** — Arrow keys to browse, `D` to download, `C` for credit, `F` to favorite
-- **Credits log** — Running list of all credits from your session, exportable as `.txt`
-- **Download queue** — Visual progress bars for each download
-- **Right-click context menu** — Quick actions on any image card
-- **Search history** — Recent searches accessible from the search bar dropdown
-- **Text size control** — Adjustable text size from Small to Extra Large
-- **Pagination** — Load more results with no limit
-- **Fully responsive** — Works on desktop, tablet, and mobile
-- **No server needed** — Runs entirely in the browser as a single HTML file
+### Core
+- **6-source search** — Openverse, Wikimedia Commons, Flickr, Unsplash, Pixabay, and Pexels in one unified grid
+- **Auto-resize** — Downloads are cropped and resized to your configured dimensions (default 1200×675)
+- **Auto-attribution** — Proper credit text is generated and copied to clipboard on every download
+- **Focal point cropping** — Click where the face or key area is before cropping so nothing important gets cut off
+- **Search suggestions** — Wikipedia-powered autocomplete as you type
 
-## 🔑 API Keys Setup
+### 🔲 Overlay Combiner
+Combine two images into one — a background image with a circular overlay portrait. Perfect for article thumbnails.
 
-All API keys are **free** and stored locally in your browser (never sent anywhere except to the respective APIs).
+1. Download any image → set focal point → click **"Add Overlay"**
+2. Choose the site: **WGTC** (orange ring) or **AOTF** (4-color ring)
+3. Search for the overlay image inside the modal, pick it, set its focal point
+4. Preview the combined result → download
 
-| Source | How to get a free key |
-|---|---|
-| **Openverse** | [Register here](https://api.openverse.org/v1/auth_tokens/register/) — you'll get a `client_id` and `client_secret` |
-| **Flickr** | [Apply here](https://www.flickr.com/services/api/misc.api_keys.html) |
-| **Unsplash** | [Sign up here](https://unsplash.com/developers) |
-| **Pixabay** | [Get key here](https://pixabay.com/api/docs/) |
-| **Pexels** | [Get key here](https://www.pexels.com/api/) |
+Both credits are saved automatically.
 
-Once you have your keys, click ⚙️ **Settings** → **API Keys** tab → paste them in → **Save**.
+### Organization
+- **Credits Log** — Every download's attribution is tracked. Copy all or export as `.txt`
+- **Favorites** — Star images to save for later. Persists across sessions
+- **Search history** — Recent searches with one-click reuse
+- **Bulk operations** — Select multiple images, download all or copy all credits at once
+- **Download queue** — Visual progress for each download
 
-## 🚀 How to Use
+### Customization
+- **Custom filenames** — Template with variables: `{query}`, `{title}`, `{source}`, `{creator}`, `{date}`, `{timestamp}`
+- **Grid sizes** — Small, Medium, or Large card layouts
+- **Text scaling** — 5 sizes from Small to Extra Large
+- **Dark / Light theme** — Toggle with one click
+- **Sound effects** — Audio feedback on downloads
 
-1. Visit the live link above
-2. Enter your API keys in Settings (one-time setup)
-3. Type a search term and hit Enter
-4. Browse results, preview, download, and copy credits
+### Navigation
+- **Keyboard shortcuts** — `Enter` search, `Ctrl+K` focus, arrows navigate, `D` download, `C` credit, `F` favorite, `Space` select, `Esc` close
+- **Right-click menu** — Quick actions on any image card
+- **Responsive design** — Works on desktop, tablet, and mobile
+
+---
+
+## 🚀 Getting Started
+
+### For users
+Just open the [live site](https://sadiktd.github.io/cc-image-finder/) and start searching. All API keys are pre-configured — it works out of the box.
+
+### For admins
+API keys are hidden by default. Press `Ctrl+Shift+A` to unlock the API Keys tab in Settings.
+
+### Self-hosting
+It's a single HTML file. Download `index.html` and open it in any browser, or host it on any static server.
+
+---
+
+## 📂 Sources
+
+| Source | License Types | API Key | Rate Limit |
+|--------|--------------|---------|------------|
+| **Openverse** | CC BY, CC BY-SA, CC0, PDM | Required (free) | 10,000/day |
+| **Wikimedia Commons** | CC BY, CC BY-SA, Public Domain | Not needed | Unlimited* |
+| **Flickr** | CC BY, CC BY-SA, CC0, Public Domain | Required (free) | 3,600/hour |
+| **Unsplash** | Unsplash License (free commercial use) | Required (free) | 50/hour (demo) |
+| **Pixabay** | Pixabay License (free commercial use) | Required (free) | 6,000/hour |
+| **Pexels** | Pexels License (free commercial use) | Required (free) | 200/hour |
+
+*Wikimedia asks for respectful usage but has no hard rate limit.
+
+---
+
+## 📝 Attribution Formats
+
+Each source generates its own standard credit:
+
+- **Openverse:** `"Photo Title" by Creator, CC BY 4.0.`
+- **Wikimedia:** `"Photo Title" by Creator, CC BY-SA 3.0. Via Wikimedia Commons.`
+- **Flickr:** `"Photo Title" by Creator, CC BY 2.0.`
+- **Unsplash:** `Photo by Creator on Unsplash.`
+- **Pixabay:** `Image by Creator on Pixabay.`
+- **Pexels:** `Photo by Creator on Pexels.`
+
+---
 
 ## ⌨️ Keyboard Shortcuts
 
 | Key | Action |
-|---|---|
-| `Enter` | Search / Preview selected |
+|-----|--------|
+| `Enter` | Search / Open preview |
 | `Ctrl+K` | Focus search bar |
 | `← → ↑ ↓` | Navigate grid |
 | `D` | Download selected image |
 | `C` | Copy credit |
 | `F` | Toggle favorite |
-| `Space` | Select/deselect for bulk |
-| `Esc` | Close any modal |
-
-## 📄 License
-
-MIT License — free to use, modify, and share.
+| `Space` | Toggle select |
+| `Esc` | Close modals |
+| `Ctrl+Shift+A` | Unlock API Keys tab |
 
 ---
 
-**Created by Sadik Hossain**
+## 🏗 Technical
+
+- **Zero dependencies** — Single HTML file, no build step, no framework
+- **Client-side only** — Runs entirely in the browser, no server needed
+- **API keys in localStorage** — Never transmitted to any third party
+- **CORS-safe** — All APIs support cross-origin requests
+- **~82KB** — Entire app including CSS and JS
+
+---
+
+## 📄 License
+
+Free to use and modify. Created by **Sadik Hossain**.
