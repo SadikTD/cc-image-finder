@@ -7,7 +7,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--font:'Outfit',-apple-system,sans-serif;--mono:'IBM Plex Mono',monospace;--ease:cubic-bezier(.25,.46,.45,.94);--ease-out:cubic-bezier(.16,1,.3,1);--green:#3ecf72;--green-d:rgba(62,207,114,.1);--red:#e84855;--red-d:rgba(232,72,85,.1);--blue:#4ea4e8;--blue-d:rgba(78,164,232,.1);--src-ov:#b06cf0;--src-wc:#069;--src-fl:#ff1f84;--src-un:#999;--src-px:#00c27a;--src-pe:#07b890;--fs:1}
+:root{--font:'Outfit',-apple-system,sans-serif;--mono:'IBM Plex Mono',monospace;--ease:cubic-bezier(.25,.46,.45,.94);--ease-out:cubic-bezier(.16,1,.3,1);--green:#3ecf72;--green-d:rgba(62,207,114,.1);--red:#e84855;--red-d:rgba(232,72,85,.1);--blue:#4ea4e8;--blue-d:rgba(78,164,232,.1);--src-ov:#b06cf0;--src-wc:#069;--src-fl:#ff1f84;--src-un:#999;--src-px:#00c27a;--src-pe:#07b890;--src-wh:#003087;--fs:1}
 [data-theme="dark"]{--bg0:#08090a;--bg1:#0f1012;--bg2:#161719;--bg3:#1e1f22;--bg4:#26272b;--bg5:#2e3035;--bd1:#1e2024;--bd2:#2a2c31;--bd3:#363840;--t1:#f2f2f4;--t2:#c8cad0;--t3:#949aa4;--t4:#6e737d;--card:#161719;--topbar:rgba(15,16,18,.88);--accent:#e8a832;--accent-h:#f0bc54;--accent-d:rgba(232,168,50,.10);--on-accent:#000}
 [data-theme="light"]{--bg0:#f5f6f8;--bg1:#ffffff;--bg2:#edeef0;--bg3:#e2e3e7;--bg4:#d4d5da;--bg5:#c0c1c7;--bd1:#dddee2;--bd2:#ccced3;--bd3:#b5b7be;--t1:#0f1114;--t2:#3b3d44;--t3:#62656d;--t4:#8f929b;--card:#ffffff;--topbar:rgba(255,255,255,.90);--accent:#b06e00;--accent-h:#945c00;--accent-d:rgba(176,110,0,.08);--on-accent:#fff;--green:#1a8a42;--red:#c0343f;--blue:#2a7ec7}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -73,7 +73,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
 .card:hover .thumb img{transform:scale(1.05)}
 .sb{position:absolute;top:7px;left:7px;padding:2px 7px;border-radius:4px;font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;backdrop-filter:blur(8px);z-index:2}
-.sb-openverse{background:rgba(176,108,240,.88);color:#fff}.sb-wikimedia{background:rgba(0,102,153,.88);color:#fff}.sb-flickr{background:rgba(255,31,132,.88);color:#fff}.sb-unsplash{background:rgba(200,200,200,.92);color:#111}.sb-pixabay{background:rgba(0,194,122,.88);color:#fff}.sb-pexels{background:rgba(7,184,144,.88);color:#fff}
+.sb-openverse{background:rgba(176,108,240,.88);color:#fff}.sb-wikimedia{background:rgba(0,102,153,.88);color:#fff}.sb-flickr{background:rgba(255,31,132,.88);color:#fff}.sb-unsplash{background:rgba(200,200,200,.92);color:#111}.sb-pixabay{background:rgba(0,194,122,.88);color:#fff}.sb-pexels{background:rgba(7,184,144,.88);color:#fff}.sb-whitehouse{background:rgba(0,48,135,.88);color:#fff}
 .lb{position:absolute;bottom:7px;left:7px;padding:2px 6px;border-radius:4px;font-size:8px;font-weight:500;background:rgba(0,0,0,.6);color:#aaa;backdrop-filter:blur(4px);z-index:2;max-width:65%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dlc{display:none;position:absolute;top:7px;right:7px;width:22px;height:22px;border-radius:50%;background:var(--green);color:#000;font-size:12px;font-weight:700;place-items:center;z-index:5}
 .fs{position:absolute;top:7px;right:7px;z-index:5;background:none;border:none;color:rgba(255,255,255,.5);font-size:17px;cursor:pointer;opacity:0;transition:all .15s;filter:drop-shadow(0 1px 3px rgba(0,0,0,.5));line-height:1}
@@ -318,6 +318,23 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .pk-empty{text-align:center;padding:60px 20px;color:var(--t4);font-size:13px}
 .pk-loading{text-align:center;padding:50px 20px;color:var(--t4);font-size:13px}
 
+/* === COLLAGE MAKER BUTTON === */
+.cm-btn{display:inline-flex;align-items:center;gap:6px;padding:0 14px;height:34px;border-radius:8px;border:none;background:var(--accent);color:var(--on-accent);font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 2px 10px var(--accent-d);white-space:nowrap;flex-shrink:0}
+.cm-btn:hover{background:var(--accent-h);transform:translateY(-1px);box-shadow:0 4px 14px var(--accent-d)}
+@media(max-width:520px){.cm-lbl{display:none}}
+
+/* === PICKER TABS === */
+.pk-tabs{display:flex;gap:2px;padding:10px 18px 0;flex-shrink:0;border-bottom:1px solid var(--bd2);margin-bottom:0}
+.pk-tab{padding:7px 14px;border-radius:7px 7px 0 0;border:1px solid transparent;background:none;color:var(--t4);font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;transition:.15s;border-bottom:none}
+.pk-tab:hover{color:var(--t1);background:var(--bg2)}
+.pk-tab.on{background:var(--bg1);color:var(--t1);border-color:var(--bd2);border-bottom-color:var(--bg1);margin-bottom:-1px}
+.pk-paste-area{padding:32px 18px;display:flex;align-items:center;justify-content:center}
+.pk-paste-zone{border:2px dashed var(--bd3);border-radius:14px;padding:52px 32px;color:var(--t4);font-size:13px;line-height:1.8;cursor:pointer;transition:all .2s;width:100%;text-align:center}
+.pk-paste-zone:hover,.pk-paste-zone.drag{border-color:var(--accent);background:var(--accent-d);color:var(--t1)}
+.pk-upload-area{padding:60px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.pk-upload-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:10px;border:none;background:var(--accent);color:var(--on-accent);font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:.15s}
+.pk-upload-btn:hover{background:var(--accent-h);transform:translateY(-1px)}
+
 @media(max-width:900px){
   .ed-main,.cl-main{flex-direction:column}
   .ed-side,.cl-side{width:100%;max-height:38vh;border-left:none;border-top:1px solid var(--bd1)}
@@ -454,6 +471,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 <div class="logo"><div class="logo-mark">📸</div><div class="logo-info"><div class="logo-text">CC Image Finder</div><div class="logo-by">by Sadik Hossain</div></div></div>
 <div class="search-wrap"><div class="search-box"><span class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-input" id="sIn" type="text" placeholder="Search CC images..." autofocus autocomplete="off"><button class="sbtn" id="sBtn" onclick="doSearch()">Search</button></div><div class="sh" id="sH"></div><div class="sg" id="sG"></div></div>
 <div class="tba">
+<button class="cm-btn" title="Open Standalone Collage Maker" onclick="clOpenStandalone()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg><span class="cm-lbl">Collage Maker</span></button>
 <button class="tb" title="Credits Log" onclick="tgCred()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span class="bdg" id="cBdg" style="display:none"></span></button>
 <button class="tb" title="Favorites" onclick="tgFav()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
 <button class="tb" title="Tips & Guide" onclick="tgTips()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></button>
@@ -463,6 +481,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 
 <div class="toolbar"><span class="tl">Sources</span>
 <div class="chip chip-all on" data-src="all" onclick="toggleAll()"><span class="dot" style="background:var(--t3)"></span>All</div>
+<div class="chip on" data-src="whitehouse" onclick="tgChip(this)"><span class="dot" style="background:var(--src-wh)"></span>White House<span class="cnt" id="cnt-whitehouse"></span></div>
 <div class="chip on" data-src="openverse" onclick="tgChip(this)"><span class="dot" style="background:var(--src-ov)"></span>Openverse<span class="cnt" id="cnt-openverse"></span></div>
 <div class="chip on" data-src="wikimedia" onclick="tgChip(this)"><span class="dot" style="background:var(--src-wc)"></span>Wikimedia<span class="cnt" id="cnt-wikimedia"></span></div>
 <div class="chip on" data-src="flickr" onclick="tgChip(this)"><span class="dot" style="background:var(--src-fl)"></span>Flickr<span class="cnt" id="cnt-flickr"></span></div>
@@ -652,11 +671,35 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 <h3>➕ Add Image to Slice <span id="pkN"></span></h3>
 <button class="mc" onclick="pkClose()">×</button>
 </div>
+<div class="pk-tabs">
+<button class="pk-tab on" onclick="pkTab('search')">🔍 Search</button>
+<button class="pk-tab" onclick="pkTab('paste')">📋 Paste</button>
+<button class="pk-tab" onclick="pkTab('upload')">📁 Upload</button>
+</div>
+<div id="pkTabSearch">
 <div class="pk-srch">
 <input type="text" id="pkIn" placeholder="Search for an image..." autocomplete="off" onkeydown="if(event.key==='Enter')pkSearch()">
 <button onclick="pkSearch()">Search</button>
 </div>
 <div class="pk-results" id="pkResults"><div class="pk-empty">Type a search term above to find images</div></div>
+</div>
+<div id="pkTabPaste" style="display:none">
+<div class="pk-paste-area">
+<div class="pk-paste-zone" id="pkPasteZone">
+<div style="font-size:36px;margin-bottom:12px">📋</div>
+<b style="font-size:15px;color:var(--t1)">Press Ctrl+V to paste an image</b><br>
+<span style="font-size:12px">or drag & drop an image here</span><br>
+<span style="font-size:11px;opacity:.5;margin-top:4px;display:block">PNG, JPG, WEBP, GIF supported</span>
+</div>
+</div>
+</div>
+<div id="pkTabUpload" style="display:none">
+<div class="pk-upload-area">
+<button class="pk-upload-btn" onclick="$('pkFileI').click()">📁 Choose Image from Desktop</button>
+<p style="font-size:12px;color:var(--t4)">PNG, JPG, WEBP, GIF supported</p>
+</div>
+</div>
+<input type="file" id="pkFileI" accept="image/*" style="display:none" onchange="pkFileLoad(this)">
 </div></div>
 
 <div class="mbg" id="sBg" onclick="if(event.target===this)tgSet()"><div class="modal"><div class="mh"><h2>⚙️ Settings</h2><button class="mc" onclick="tgSet()">×</button></div>
@@ -712,25 +755,27 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 <span style="display:inline-block;background:var(--bg3);border:1px solid var(--bd2);border-radius:4px;padding:1px 6px;font-family:var(--mono);font-size:11px;margin:2px">Space</span> Select &nbsp;
 <span style="display:inline-block;background:var(--bg3);border:1px solid var(--bd2);border-radius:4px;padding:1px 6px;font-family:var(--mono);font-size:11px;margin:2px">Esc</span> Close</div>
 <div style="margin-bottom:18px"><b style="font-size:14px;color:var(--t1)">🔑 API Keys</b><br>API keys are managed by the admin. Press <span style="display:inline-block;background:var(--bg3);border:1px solid var(--bd2);border-radius:4px;padding:1px 6px;font-family:var(--mono);font-size:11px">Ctrl+Shift+A</span> to unlock the API Keys tab in Settings. Wikimedia Commons works without any key. Keys are stored locally in your browser.</div>
-<div><b style="font-size:14px;color:var(--t1)">📂 6 Sources</b><br>
+<div style="margin-bottom:18px"><b style="font-size:14px;color:var(--t1)">🏛 Standalone Collage Maker</b><br>Click the purple <b>Collage Maker</b> button in the top bar to open an empty collage canvas. Choose 2 or 3 slices, then fill each slot by: <b>searching</b> (Search tab), <b>pasting a screenshot</b> (Paste tab → Ctrl+V), or <b>uploading from your desktop</b> (Upload tab → choose file). The same crop, pan, zoom, and adjustment controls apply to every slice.</div>
+<div><b style="font-size:14px;color:var(--t1)">📂 7 Sources</b><br>
 <b style="color:var(--src-ov)">Openverse</b> — 700M+ CC-licensed images from across the web<br>
 <b style="color:var(--src-wc)">Wikimedia</b> — 130M+ free media files, no API key needed<br>
 <b style="color:var(--src-fl)">Flickr</b> — CC-licensed photos from photographers worldwide<br>
 <b style="color:#999">Unsplash</b> — High-quality photos with Unsplash License<br>
 <b style="color:var(--src-px)">Pixabay</b> — Free images and illustrations<br>
-<b style="color:var(--src-pe)">Pexels</b> — Curated free stock photos</div>
+<b style="color:var(--src-pe)">Pexels</b> — Curated free stock photos<br>
+<b style="color:var(--src-wh)">White House</b> — Official White House photos, public domain. Search by event name (e.g. "Daytona", "Easter", "UFC"). No API key needed.</div>
 </div></div>
 
 <canvas id="cv" style="display:none"></canvas>
 <script>
 const $=id=>document.getElementById(id);
-let R=[],sel=new Set(),favs=JSON.parse(localStorage.getItem('ccf3_fav')||'[]'),hist=JSON.parse(localStorage.getItem('ccf3_hist')||'[]'),sHist=JSON.parse(localStorage.getItem('ccf3_sh')||'[]'),sCr=[],pvIt=null,sDL=0,cPg=1,cQ='',kbI=-1,cxI=-1,ovTk=null,ovTkExp=0,wcCont=null;
+let R=[],sel=new Set(),favs=JSON.parse(localStorage.getItem('ccf3_fav')||'[]'),hist=JSON.parse(localStorage.getItem('ccf3_hist')||'[]'),sHist=JSON.parse(localStorage.getItem('ccf3_sh')||'[]'),sCr=[],pvIt=null,sDL=0,cPg=1,cQ='',kbI=-1,cxI=-1,ovTk=null,ovTkExp=0,wcCont=null,whCache=null;
 const DF={w:1200,h:675,q:92,fname:'CC {title} - {source}',grid:'md',pp:24,ts:1.2,autoCopy:true,showQueue:true,focalPt:true,keyNav:true,sounds:true,ovId:'ASNPpk95QGPW2ormSArvmF236ch86UGTCejQ6jUq',ovSe:'Vcuuig4u4Ko54LgIpoWHXMuN7jBzX0BmRIbR6olz8tUUgcEdaC6arzJhYHa8HQXmlAh8qaO7gcTCSZnbcetigzWJ2u4oostbjwoa9bWh53Ypg0LxG2EF1I2fGwCBN7Qs',flickr:'',unsplash:'CyjNsVR2HuaqBjd7jmXoGNe1vWx9mFs3eQ4iXmJ1DLI',pixabay:'26012254-d290bc9cecaa90b7a640eebc2',pexels:'gUnwVZRjJgutUJxAtmO4p52qVFmhRwAFgG6ksiubABPBkQKZ7QP0Ivfd',proxy:'https://api.allorigins.win/raw?url=',theme:'dark'};
 function G(){const r=localStorage.getItem('ccf3_cfg');return r?{...DF,...JSON.parse(r)}:{...DF}}
 function S(c){localStorage.setItem('ccf3_cfg',JSON.stringify(c))}
 function loadCfg(){const c=G();$('cW').value=c.w;$('cH').value=c.h;$('cQ').value=c.q;$('cFn').value=c.fname;$('cGr').value=c.grid;$('cPp').value=c.pp;$('cTs').value=c.ts||1;$('cAC').checked=c.autoCopy;$('cSQ').checked=c.showQueue;$('cFP').checked=c.focalPt;$('cKN').checked=c.keyNav;$('cSn').checked=c.sounds;$('cOI').value=c.ovId||'';$('cOS').value=c.ovSe||'';$('cFl').value=c.flickr||'';$('cUn').value=c.unsplash||'';$('cPx').value=c.pixabay||'';$('cPe').value=c.pexels||'';apT(c.theme);apG(c.grid);apTs(c.ts||1);upCK()}
 function saveCfg(){const c={w:+$('cW').value||1200,h:+$('cH').value||675,q:+$('cQ').value||92,fname:$('cFn').value||DF.fname,grid:$('cGr').value,pp:+$('cPp').value||24,ts:+$('cTs').value||1,autoCopy:$('cAC').checked,showQueue:$('cSQ').checked,focalPt:$('cFP').checked,keyNav:$('cKN').checked,sounds:$('cSn').checked,ovId:$('cOI').value.trim(),ovSe:$('cOS').value.trim(),flickr:$('cFl').value.trim(),unsplash:$('cUn').value.trim(),pixabay:$('cPx').value.trim(),pexels:$('cPe').value.trim(),proxy:DF.proxy,theme:document.documentElement.getAttribute('data-theme')};S(c);apG(c.grid);apTs(c.ts);upCK();ovTk=null;tgSet();toast('Settings saved!','ok')}
-function upCK(){const c=G();document.querySelectorAll('.chip:not(.chip-all)').forEach(ch=>{const s=ch.dataset.src;if(s==='openverse'){ch.classList.toggle('nokey',!c.ovId);return}if(s==='wikimedia'){ch.classList.remove('nokey');return}ch.classList.toggle('nokey',!c[s])})}
+function upCK(){const c=G();document.querySelectorAll('.chip:not(.chip-all)').forEach(ch=>{const s=ch.dataset.src;if(s==='openverse'){ch.classList.toggle('nokey',!c.ovId);return}if(s==='wikimedia'){ch.classList.remove('nokey');return}if(s==='whitehouse'){ch.classList.remove('nokey');return}ch.classList.toggle('nokey',!c[s])})}
 function apG(s){$('grid').className='grid '+s}
 function apTs(v){document.documentElement.style.setProperty('--fs',v)}
 function apT(t){document.documentElement.setAttribute('data-theme',t);$('tBtn').textContent=t==='dark'?'🌙':'☀️'}
@@ -748,9 +793,12 @@ async function srcUN(q,k,pg,pp){const r=[];if(!k)return r;try{const resp=await f
 async function srcPX(q,k,pg,pp){const r=[];if(!k)return r;try{const resp=await fetch(`https://pixabay.com/api/?key=${k}&q=${encodeURIComponent(q)}&page=${pg}&per_page=${pp}&image_type=photo`);const d=await resp.json();for(const i of(d.hits||[])){const cr=i.user||'Unknown';r.push({id:''+i.id,src:'Pixabay',title:`Photo by ${cr}`,creator:cr,thumb:i.webformatURL||'',full:i.largeImageURL||'',lic:'Pixabay License',credit:`Image by ${cr} on Pixabay.`,pageUrl:i.pageURL||'',w:i.imageWidth||0,h:i.imageHeight||0})}}catch(e){console.warn('PX:',e)}return r}
 async function srcPE(q,k,pg,pp){const r=[];if(!k)return r;try{const resp=await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(q)}&page=${pg}&per_page=${pp}`,{headers:{'Authorization':k}});const d=await resp.json();for(const i of(d.photos||[])){const cr=i.photographer||'Unknown';r.push({id:''+i.id,src:'Pexels',title:`Photo by ${cr}`,creator:cr,thumb:i.src?.medium||'',full:i.src?.large2x||i.src?.original||'',lic:'Pexels License',credit:`Photo by ${cr} on Pexels.`,pageUrl:i.url||'',w:i.width||0,h:i.height||0})}}catch(e){console.warn('PE:',e)}return r}
 
-async function doSearch(){const q=$('sIn').value.trim();if(!q)return;clSg();const srcs=[...document.querySelectorAll('.chip.on:not(.chip-all)')].map(c=>c.dataset.src);if(!srcs.length)return toast('Enable a source','err');cQ=q;cPg=1;R=[];wcCont=null;clrSel();kbI=-1;setSt('loading');$('sBtn').disabled=true;rsCn();addSH(q);clSH();const c=G(),pp=c.pp||24;const res=await Promise.allSettled([srcs.includes('openverse')?srcOV(q,1,pp):Promise.resolve([]),srcs.includes('wikimedia')?srcWC(q,1,pp):Promise.resolve([]),srcs.includes('flickr')?srcFL(q,c.flickr,1,pp):Promise.resolve([]),srcs.includes('unsplash')?srcUN(q,c.unsplash,1,pp):Promise.resolve([]),srcs.includes('pixabay')?srcPX(q,c.pixabay,1,pp):Promise.resolve([]),srcs.includes('pexels')?srcPE(q,c.pexels,1,pp):Promise.resolve([])]);for(const r of res)if(r.status==='fulfilled')R.push(...r.value);upCn();$('sBtn').disabled=false;if(!R.length){setSt('noResults');return}render();setSt('grid');$('lmW').style.display='block'}
-async function loadMore(){cPg++;$('lmB').disabled=true;$('lmB').textContent='Loading...';const c=G(),pp=c.pp||24,srcs=[...document.querySelectorAll('.chip.on:not(.chip-all)')].map(ch=>ch.dataset.src);const res=await Promise.allSettled([srcs.includes('openverse')?srcOV(cQ,cPg,pp):Promise.resolve([]),srcs.includes('wikimedia')?srcWC(cQ,cPg,pp):Promise.resolve([]),srcs.includes('flickr')?srcFL(cQ,c.flickr,cPg,pp):Promise.resolve([]),srcs.includes('unsplash')?srcUN(cQ,c.unsplash,cPg,pp):Promise.resolve([]),srcs.includes('pixabay')?srcPX(cQ,c.pixabay,cPg,pp):Promise.resolve([]),srcs.includes('pexels')?srcPE(cQ,c.pexels,cPg,pp):Promise.resolve([])]);let n=0;for(const r of res)if(r.status==='fulfilled'){R.push(...r.value);n+=r.value.length}upCn();render();$('lmB').disabled=false;$('lmB').textContent=n?'Load More Results':'No more';if(!n)$('lmB').disabled=true}
-function rsCn(){['openverse','wikimedia','flickr','unsplash','pixabay','pexels'].forEach(s=>$('cnt-'+s).textContent='')}
+async function fetchWHSitemap(){if(whCache)return whCache;const sUrl='https://www.whitehouse.gov/gallery-sitemap.xml';const proxyFns=[u=>'https://corsproxy.io/?'+encodeURIComponent(u),u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),u=>'https://api.codetabs.com/v1/proxy?quest='+u];let xml='';try{const r=await fetch(sUrl);if(r.ok)xml=await r.text()}catch{}if(!xml){for(const mk of proxyFns){if(xml)break;try{const r=await fetch(mk(sUrl));if(r.ok){const t=await r.text();if(t.includes('<url>'))xml=t}}catch{}}}if(!xml){console.warn('WH: all proxies failed');return(whCache=[])};const entries=[];for(const block of xml.matchAll(/<url>([\s\S]*?)<\/url>/g)){const body=block[1];const pageUrl=((body.match(/<loc>(.*?)<\/loc>/)||[])[1]||'').trim();if(!pageUrl.includes('/gallery/'))continue;const slug=pageUrl.replace('https://www.whitehouse.gov/gallery/','').replace(/\/$/,'');const title=slug.replace(/-/g,' ').replace(/\b\w/g,ch=>ch.toUpperCase());const allImgs=[...body.matchAll(/<image:loc>(.*?)<\/image:loc>/g)].map(m=>m[1].trim());const fulls=allImgs.filter(u=>!u.includes('?w='));for(let i=0;i<fulls.length;i++){entries.push({id:'wh_'+slug+'_'+i,src:'WhiteHouse',title,creator:'Official White House Photo',thumb:fulls[i]+'?w=600',full:fulls[i],lic:'Public Domain',credit:`Image by Official White House Photo. Public Domain.`,pageUrl,w:0,h:0})}}return(whCache=entries.reverse())}
+async function srcWH(q,pg,pp){try{const all=await fetchWHSitemap();const ql=q.toLowerCase();const matched=all.filter(i=>i.title.toLowerCase().includes(ql));return matched.slice((pg-1)*pp,pg*pp)}catch(e){console.warn('WH:',e);return[]}}
+
+async function doSearch(){const q=$('sIn').value.trim();if(!q)return;clSg();const srcs=[...document.querySelectorAll('.chip.on:not(.chip-all)')].map(c=>c.dataset.src);if(!srcs.length)return toast('Enable a source','err');cQ=q;cPg=1;R=[];wcCont=null;clrSel();kbI=-1;setSt('loading');$('sBtn').disabled=true;rsCn();addSH(q);clSH();const c=G(),pp=c.pp||24;const res=await Promise.allSettled([srcs.includes('whitehouse')?srcWH(q,1,pp):Promise.resolve([]),srcs.includes('openverse')?srcOV(q,1,pp):Promise.resolve([]),srcs.includes('wikimedia')?srcWC(q,1,pp):Promise.resolve([]),srcs.includes('flickr')?srcFL(q,c.flickr,1,pp):Promise.resolve([]),srcs.includes('unsplash')?srcUN(q,c.unsplash,1,pp):Promise.resolve([]),srcs.includes('pixabay')?srcPX(q,c.pixabay,1,pp):Promise.resolve([]),srcs.includes('pexels')?srcPE(q,c.pexels,1,pp):Promise.resolve([])]);for(const r of res)if(r.status==='fulfilled')R.push(...r.value);upCn();$('sBtn').disabled=false;if(!R.length){setSt('noResults');return}render();setSt('grid');$('lmW').style.display='block'}
+async function loadMore(){cPg++;$('lmB').disabled=true;$('lmB').textContent='Loading...';const c=G(),pp=c.pp||24,srcs=[...document.querySelectorAll('.chip.on:not(.chip-all)')].map(ch=>ch.dataset.src);const res=await Promise.allSettled([srcs.includes('whitehouse')?srcWH(cQ,cPg,pp):Promise.resolve([]),srcs.includes('openverse')?srcOV(cQ,cPg,pp):Promise.resolve([]),srcs.includes('wikimedia')?srcWC(cQ,cPg,pp):Promise.resolve([]),srcs.includes('flickr')?srcFL(cQ,c.flickr,cPg,pp):Promise.resolve([]),srcs.includes('unsplash')?srcUN(cQ,c.unsplash,cPg,pp):Promise.resolve([]),srcs.includes('pixabay')?srcPX(cQ,c.pixabay,cPg,pp):Promise.resolve([]),srcs.includes('pexels')?srcPE(cQ,c.pexels,cPg,pp):Promise.resolve([])]);let n=0;for(const r of res)if(r.status==='fulfilled'){R.push(...r.value);n+=r.value.length}upCn();render();$('lmB').disabled=false;$('lmB').textContent=n?'Load More Results':'No more';if(!n)$('lmB').disabled=true}
+function rsCn(){['openverse','wikimedia','flickr','unsplash','pixabay','pexels','whitehouse'].forEach(s=>$('cnt-'+s).textContent='')}
 function upCn(){const cn={};R.forEach(r=>{const s=r.src.toLowerCase();cn[s]=(cn[s]||0)+1});for(const[s,n]of Object.entries(cn)){const e=$('cnt-'+s);if(e)e.textContent=n}$('tCnt').textContent=R.length;$('tStats').style.display='flex'}
 
 function setSt(s){$('stE').style.display=s==='empty'?'block':'none';$('stL').style.display=s==='loading'?'block':'none';$('stN').style.display=s==='noResults'?'block':'none';$('grid').style.display=s==='grid'?'grid':'none';if(s!=='grid')$('lmW').style.display='none'}
@@ -868,6 +916,7 @@ const CL={count:2,slices:[],color:'#DC2626',outer:6,divider:6,radius:0,bg:'#0000
 function clOpen(initialSlices,opts){opts=opts||{};CL.count=Math.max(2,Math.min(3,initialSlices.length||2));$('clR2').classList.toggle('on',CL.count===2);$('clR3').classList.toggle('on',CL.count===3);CL.slices=[];for(let i=0;i<CL.count;i++)CL.slices.push(initialSlices[i]||null);CL.activeSlice=-1;CL.fromEdit=opts.fromEdit||null;$('clBackBtn').style.display=CL.fromEdit?'':'none';$('clActive').style.display='none';$('clBg').classList.add('open');for(const s of CL.slices)if(s)clSliceFitInternal(s);clRender()}
 
 function clCancel(){$('clBg').classList.remove('open');CL.slices=[];CL.activeSlice=-1;CL.fromEdit=null}
+function clOpenStandalone(){clOpen([],{standalone:true})}
 
 function clBackToEditor(){const it=CL.fromEdit;CL.slices=[];CL.fromEdit=null;$('clBg').classList.remove('open');if(it)edOpen(it)}
 
@@ -926,9 +975,14 @@ $('clPv').addEventListener('touchstart',clCanvasDown,{passive:false});
 $('clPv').addEventListener('wheel',clCanvasWheel,{passive:false});
 
 const PK={forSlot:-1,results:[]};
-function clOpenPicker(slot){PK.forSlot=slot;$('pkN').textContent=(slot+1);$('pkIn').value='';$('pkResults').innerHTML='<div class="pk-empty">Type a search term above to find images</div>';$('pkBg').classList.add('open');setTimeout(()=>$('pkIn').focus(),100)}
-function pkClose(){$('pkBg').classList.remove('open');PK.forSlot=-1}
-async function pkSearch(){const q=$('pkIn').value.trim();if(!q)return;$('pkResults').innerHTML='<div class="pk-loading"><div class="spin"></div>Searching all sources...</div>';const c=G(),pp=12;const res=await Promise.allSettled([srcOV(q,1,pp),srcWC(q,1,pp),srcFL(q,c.flickr,1,pp),srcUN(q,c.unsplash,1,pp),srcPX(q,c.pixabay,1,pp),srcPE(q,c.pexels,1,pp)]);PK.results=[];for(const r of res)if(r.status==='fulfilled')PK.results.push(...r.value);if(!PK.results.length){$('pkResults').innerHTML='<div class="pk-empty">No results. Try different terms.</div>';return}$('pkResults').innerHTML='<div class="pk-grid">'+PK.results.map((it,i)=>`<div class="pk-card" onclick="pkPick(${i})"><img src="${esc(it.thumb)}" loading="lazy" onerror="this.style.opacity=.3"><span class="pk-csb sb-${it.src.toLowerCase()}">${it.src}</span><span class="pk-ttl">${esc((it.title||'Untitled').slice(0,40))}</span></div>`).join('')+'</div>'}
+function clOpenPicker(slot){PK.forSlot=slot;$('pkN').textContent=(slot+1);$('pkIn').value='';$('pkResults').innerHTML='<div class="pk-empty">Type a search term above to find images</div>';pkTab('search');$('pkBg').classList.add('open');setTimeout(()=>$('pkIn').focus(),100)}
+function pkClose(){$('pkBg').classList.remove('open');PK.forSlot=-1;pkTab('search')}
+function pkTab(t){const tabs=['search','paste','upload'];document.querySelectorAll('.pk-tab').forEach((b,i)=>b.classList.toggle('on',tabs[i]===t));$('pkTabSearch').style.display=t==='search'?'':'none';$('pkTabPaste').style.display=t==='paste'?'':'none';$('pkTabUpload').style.display=t==='upload'?'':'none'}
+document.addEventListener('paste',e=>{if(!$('pkBg').classList.contains('open'))return;const items=[...(e.clipboardData?.items||[])];const imgItem=items.find(i=>i.type.startsWith('image/'));if(!imgItem)return;e.preventDefault();const file=imgItem.getAsFile();if(file)pkLoadFile(file)});
+(function(){function setupDrop(){const z=$('pkPasteZone');if(!z)return;z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('drag')});z.addEventListener('dragleave',()=>z.classList.remove('drag'));z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('drag');const file=[...(e.dataTransfer?.files||[])].find(f=>f.type.startsWith('image/'));if(file)pkLoadFile(file)})}document.addEventListener('DOMContentLoaded',setupDrop);setTimeout(setupDrop,200)})();
+function pkFileLoad(input){const file=input.files[0];if(!file)return;input.value='';pkLoadFile(file)}
+function pkLoadFile(file){const reader=new FileReader();reader.onload=ev=>{const url=ev.target.result;const im=new Image();im.onload=()=>{const cfg={item:{id:'local_'+Date.now(),src:'Local',title:file.name.replace(/\.\w+$/,'')||'Pasted Image',creator:'You',thumb:url,full:url,lic:'Your Image',credit:'Your own image.',pageUrl:'',w:im.naturalWidth,h:im.naturalHeight},img:im,natW:im.naturalWidth,natH:im.naturalHeight,workCv:null,workW:im.naturalWidth,workH:im.naturalHeight,cropX:0,cropY:0,cropW:im.naturalWidth,cropH:im.naturalHeight,bri:100,con:100,sat:100,shp:0,flipH:false,flipV:false};if(PK.forSlot>=0){clSliceFitInternal(cfg);CL.slices[PK.forSlot]=cfg;const slot=PK.forSlot;pkClose();clRender();clSetActive(slot)}};im.src=url};reader.readAsDataURL(file)}
+async function pkSearch(){const q=$('pkIn').value.trim();if(!q)return;$('pkResults').innerHTML='<div class="pk-loading"><div class="spin"></div>Searching all sources...</div>';const c=G(),pp=12;const res=await Promise.allSettled([srcOV(q,1,pp),srcWC(q,1,pp),srcFL(q,c.flickr,1,pp),srcUN(q,c.unsplash,1,pp),srcPX(q,c.pixabay,1,pp),srcPE(q,c.pexels,1,pp),srcWH(q,1,pp)]);PK.results=[];for(const r of res)if(r.status==='fulfilled')PK.results.push(...r.value);if(!PK.results.length){$('pkResults').innerHTML='<div class="pk-empty">No results. Try different terms.</div>';return}$('pkResults').innerHTML='<div class="pk-grid">'+PK.results.map((it,i)=>`<div class="pk-card" onclick="pkPick(${i})"><img src="${esc(it.thumb)}" loading="lazy" onerror="this.style.opacity=.3"><span class="pk-csb sb-${it.src.toLowerCase()}">${it.src}</span><span class="pk-ttl">${esc((it.title||'Untitled').slice(0,40))}</span></div>`).join('')+'</div>'}
 async function pkPick(i){const it=PK.results[i];if(!it||PK.forSlot<0)return;const slot=PK.forSlot;$('pkResults').innerHTML='<div class="pk-loading"><div class="spin"></div>Loading image...</div>';const cfg=await loadSliceCfg(it);if(!cfg){toast('Failed to load image','err');return}clSliceFitInternal(cfg);CL.slices[slot]=cfg;PK.forSlot=-1;$('pkBg').classList.remove('open');clRender();clSetActive(slot)}
 
 function loadSliceCfg(it){return new Promise(res=>{const url=it.full||it.thumb;const tryLoad=(useCors)=>{const im=new Image();if(useCors)im.crossOrigin='anonymous';im.onload=()=>{const w=im.naturalWidth,h=im.naturalHeight;res({item:it,img:im,natW:w,natH:h,workCv:null,workW:w,workH:h,cropX:0,cropY:0,cropW:w,cropH:h,bri:100,con:100,sat:100,shp:0,flipH:false,flipV:false})};im.onerror=()=>{if(useCors)tryLoad(false);else{toast('Failed to load image','err');res(null)}};im.src=url+(useCors?(url.includes('?')?'&':'?')+'_t='+Date.now():'')};tryLoad(true)})}
