@@ -73,6 +73,49 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .sp-src .sp-dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.7}
 .sp-src.loading .sp-dot{animation:sp-pulse .8s ease-in-out infinite}
 @keyframes sp-pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+/* ===== LOGIN GATE ===== */
+#lgOverlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#09090b;overflow:hidden}
+#lgOverlay.hide{animation:lgFadeOut .6s var(--ease-out) forwards;pointer-events:none}
+#lgBg{position:absolute;inset:0;overflow:hidden}
+.lg-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;animation:lgFloat linear infinite}
+.lg-orb1{width:600px;height:600px;background:radial-gradient(circle,#e8a832,transparent 70%);top:-200px;left:-150px;animation-duration:18s}
+.lg-orb2{width:500px;height:500px;background:radial-gradient(circle,#b06cf0,transparent 70%);bottom:-150px;right:-100px;animation-duration:22s;animation-delay:-8s}
+.lg-orb3{width:350px;height:350px;background:radial-gradient(circle,#4ea4e8,transparent 70%);top:40%;left:60%;animation-duration:26s;animation-delay:-14s}
+@keyframes lgFloat{0%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.08)}66%{transform:translate(-20px,40px) scale(.95)}100%{transform:translate(0,0) scale(1)}}
+#lgCard{position:relative;width:100%;max-width:420px;margin:16px;background:rgba(15,16,18,.8);border:1px solid rgba(232,168,50,.2);border-radius:20px;padding:44px 40px 36px;backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04),inset 0 1px 0 rgba(255,255,255,.07);animation:lgCardIn .7s var(--ease-out) both}
+#lgCard.shake{animation:lgShake .45s var(--ease) both}
+@keyframes lgCardIn{from{opacity:0;transform:translateY(28px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes lgShake{0%,100%{transform:translateX(0)}15%{transform:translateX(-9px)}30%{transform:translateX(8px)}45%{transform:translateX(-6px)}60%{transform:translateX(5px)}75%{transform:translateX(-3px)}90%{transform:translateX(2px)}}
+@keyframes lgFadeOut{from{opacity:1}to{opacity:0}}
+.lg-logo{display:flex;align-items:center;justify-content:center;gap:13px;margin-bottom:32px}
+.lg-mark{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#e8a832,#d48c1a);display:grid;place-items:center;font-size:26px;box-shadow:0 6px 24px rgba(232,168,50,.35);animation:lgMarkPop .8s var(--ease-out) .2s both}
+@keyframes lgMarkPop{from{opacity:0;transform:scale(.5) rotate(-12deg)}to{opacity:1;transform:scale(1) rotate(0deg)}}
+.lg-brand{text-align:left}
+.lg-name{font-family:var(--font);font-size:22px;font-weight:800;color:#f2f2f4;letter-spacing:-.5px;line-height:1.1}
+.lg-sub{font-family:var(--font);font-size:11px;font-weight:500;color:#e8a832;letter-spacing:.6px;text-transform:uppercase;margin-top:2px}
+.lg-divider{width:40px;height:2px;background:linear-gradient(90deg,#e8a832,transparent);border-radius:1px;margin:0 0 28px}
+.lg-heading{font-family:var(--font);font-size:15px;font-weight:600;color:#c8cad0;margin-bottom:6px}
+.lg-hint{font-family:var(--font);font-size:12px;color:#6e737d;margin-bottom:22px;line-height:1.5}
+.lg-field{position:relative;margin-bottom:14px}
+.lg-input{width:100%;height:48px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:11px;color:#f2f2f4;font-family:var(--font);font-size:15px;font-weight:500;padding:0 48px 0 16px;outline:none;box-sizing:border-box;transition:all .2s;letter-spacing:.15em}
+.lg-input::placeholder{color:#6e737d;letter-spacing:0}
+.lg-input:focus{border-color:rgba(232,168,50,.6);background:rgba(232,168,50,.06);box-shadow:0 0 0 3px rgba(232,168,50,.12)}
+.lg-input.err{border-color:rgba(232,72,85,.7);background:rgba(232,72,85,.07);box-shadow:0 0 0 3px rgba(232,72,85,.12)}
+.lg-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#6e737d;padding:4px;line-height:1;transition:color .15s;font-size:16px}
+.lg-eye:hover{color:#c8cad0}
+.lg-err{font-family:var(--font);font-size:12px;color:#e84855;margin-bottom:12px;min-height:16px;display:flex;align-items:center;gap:5px;opacity:0;transition:opacity .2s}
+.lg-err.show{opacity:1}
+.lg-btn{width:100%;height:48px;border-radius:11px;border:none;background:linear-gradient(135deg,#e8a832,#d48c1a);color:#000;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.3px;box-shadow:0 4px 20px rgba(232,168,50,.3);display:flex;align-items:center;justify-content:center;gap:8px}
+.lg-btn:hover{background:linear-gradient(135deg,#f0bc54,#e8a832);box-shadow:0 6px 28px rgba(232,168,50,.45);transform:translateY(-1px)}
+.lg-btn:active{transform:translateY(0)}
+.lg-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.lg-footer{margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);text-align:center}
+.lg-contact{font-family:var(--font);font-size:12px;color:#6e737d;line-height:1.6}
+.lg-contact b{color:#949aa4;font-weight:600}
+.lg-lock-icon{display:block;font-size:18px;margin-bottom:4px;opacity:.5}
+.lg-dots{display:flex;justify-content:center;gap:4px;margin-top:18px}
+.lg-dot{width:5px;height:5px;border-radius:50%;background:#2a2c31;transition:background .3s}
+.lg-dot.active{background:#e8a832}
 .main{max-width:1680px;margin:0 auto;padding:10px 24px 80px}
 .grid{display:grid;gap:10px}
 .grid.sm{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}.grid.md{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}.grid.lg{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
@@ -480,6 +523,50 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
+
+<!-- LOGIN GATE -->
+<div id="lgOverlay">
+  <div id="lgBg">
+    <div class="lg-orb lg-orb1"></div>
+    <div class="lg-orb lg-orb2"></div>
+    <div class="lg-orb lg-orb3"></div>
+  </div>
+  <div id="lgCard">
+    <div class="lg-logo">
+      <div class="lg-mark">📸</div>
+      <div class="lg-brand">
+        <div class="lg-name">CC Image Finder</div>
+        <div class="lg-sub">by Sadik Hossain</div>
+      </div>
+    </div>
+    <div class="lg-divider"></div>
+    <div class="lg-heading">Welcome back</div>
+    <div class="lg-hint">Enter your access password to continue.</div>
+    <div class="lg-field">
+      <input class="lg-input" id="lgPwd" type="password" placeholder="Access password" autocomplete="current-password" spellcheck="false" onkeydown="if(event.key==='Enter')lgSubmit()">
+      <button class="lg-eye" id="lgEye" type="button" onclick="lgToggleEye()" title="Show/hide password">
+        <svg id="lgEyeShow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <svg id="lgEyeHide" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+      </button>
+    </div>
+    <div class="lg-err" id="lgErr">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="lgErrTxt">Incorrect password. Try again.</span>
+    </div>
+    <button class="lg-btn" id="lgBtn" onclick="lgSubmit()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Unlock Access
+    </button>
+    <div class="lg-dots">
+      <div class="lg-dot"></div><div class="lg-dot"></div><div class="lg-dot"></div>
+    </div>
+    <div class="lg-footer">
+      <span class="lg-lock-icon">🔒</span>
+      <div class="lg-contact">Don't have the password?<br><b>Reach out to Sadik Hossain</b> to get access.</div>
+    </div>
+  </div>
+</div>
+
 <div class="topbar"><div class="topbar-inner">
 <div class="logo"><div class="logo-mark">📸</div><div class="logo-info"><div class="logo-text">CC Image Finder</div><div class="logo-by">by Sadik Hossain</div></div></div>
 <div class="search-wrap"><div class="search-box"><span class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-input" id="sIn" type="text" placeholder="Search CC images..." autofocus autocomplete="off"><button class="sbtn" id="sBtn" onclick="doSearch()">Search</button></div><div class="sh" id="sH"></div><div class="sg" id="sG"></div></div>
@@ -782,6 +869,59 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 
 <canvas id="cv" style="display:none"></canvas>
 <script>
+/* ===== LOGIN GATE ===== */
+(function(){
+  const SK='ccf_auth';
+  function lgUnlock(){
+    const ov=document.getElementById('lgOverlay');
+    // animate the dots progress
+    const dots=[...ov.querySelectorAll('.lg-dot')];
+    let d=0;
+    const t=setInterval(()=>{if(d<dots.length){dots[d++].classList.add('active');}else{clearInterval(t);}},140);
+    setTimeout(()=>{
+      ov.classList.add('hide');
+      setTimeout(()=>{ov.style.display='none';},600);
+    },dots.length*140+200);
+    sessionStorage.setItem(SK,'1');
+  }
+  if(sessionStorage.getItem(SK)==='1'){
+    // already authed this session — skip immediately
+    const ov=document.getElementById('lgOverlay');
+    ov.style.display='none';
+    return;
+  }
+  window.lgSubmit=function(){
+    const inp=document.getElementById('lgPwd');
+    const err=document.getElementById('lgErr');
+    const btn=document.getElementById('lgBtn');
+    const card=document.getElementById('lgCard');
+    const val=inp.value;
+    if(!val){inp.classList.add('err');err.querySelector('#lgErrTxt').textContent='Please enter a password.';err.classList.add('show');inp.focus();return;}
+    if(val==='STD007'){
+      inp.classList.remove('err');err.classList.remove('show');
+      btn.disabled=true;btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> Access Granted';
+      lgUnlock();
+    } else {
+      inp.classList.add('err');err.querySelector('#lgErrTxt').textContent='Incorrect password. Try again.';err.classList.add('show');
+      card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');
+      inp.select();
+    }
+  };
+  window.lgToggleEye=function(){
+    const inp=document.getElementById('lgPwd');
+    const s=document.getElementById('lgEyeShow');
+    const h=document.getElementById('lgEyeHide');
+    const isText=inp.type==='text';
+    inp.type=isText?'password':'text';
+    s.style.display=isText?'':'none';
+    h.style.display=isText?'none':'';
+  };
+  // clear error on type
+  document.getElementById('lgPwd').addEventListener('input',function(){
+    this.classList.remove('err');document.getElementById('lgErr').classList.remove('show');
+  });
+})();
+/* ===== APP ===== */
 const $=id=>document.getElementById(id);
 let R=[],sel=new Set(),favs=JSON.parse(localStorage.getItem('ccf3_fav')||'[]'),hist=JSON.parse(localStorage.getItem('ccf3_hist')||'[]'),sHist=JSON.parse(localStorage.getItem('ccf3_sh')||'[]'),sCr=[],pvIt=null,sDL=0,cPg=1,cQ='',kbI=-1,cxI=-1,ovTk=null,ovTkExp=0,wcCont=null,whCache=null;
 const DF={w:1200,h:675,q:92,fname:'CC {title} - {source}',grid:'md',pp:24,ts:1.2,autoCopy:true,showQueue:true,focalPt:true,keyNav:true,sounds:true,ovId:'ASNPpk95QGPW2ormSArvmF236ch86UGTCejQ6jUq',ovSe:'Vcuuig4u4Ko54LgIpoWHXMuN7jBzX0BmRIbR6olz8tUUgcEdaC6arzJhYHa8HQXmlAh8qaO7gcTCSZnbcetigzWJ2u4oostbjwoa9bWh53Ypg0LxG2EF1I2fGwCBN7Qs',flickr:'',unsplash:'CyjNsVR2HuaqBjd7jmXoGNe1vWx9mFs3eQ4iXmJ1DLI',pixabay:'26012254-d290bc9cecaa90b7a640eebc2',pexels:'gUnwVZRjJgutUJxAtmO4p52qVFmhRwAFgG6ksiubABPBkQKZ7QP0Ivfd',proxy:'https://api.allorigins.win/raw?url=',theme:'dark'};
