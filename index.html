@@ -60,6 +60,19 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .tr{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:11px;color:var(--t4)}
 .stat{display:flex;align-items:center;gap:4px}.stat b{color:var(--t2);font-weight:600}.stat.dl{color:var(--green)}.stat.dl b{color:var(--green)}
 
+/* source progress bar */
+#srcProg{padding:10px 0 6px;transition:opacity .5s}
+#srcProg.done{opacity:0;pointer-events:none}
+#srcProgTrack{height:3px;background:var(--bd2);border-radius:2px;overflow:hidden;margin-bottom:8px}
+#srcProgFill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-h));border-radius:2px;width:0%;transition:width .4s var(--ease-out)}
+#srcProgSrcs{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+#srcProgLbl{font-size:10px;color:var(--t4);margin-left:auto;flex-shrink:0}
+.sp-src{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;border:1px solid var(--bd2);color:var(--t4);background:var(--bg2);transition:all .3s var(--ease-out)}
+.sp-src.done{border-color:var(--green);color:var(--green);background:var(--green-d)}
+.sp-src.skip{opacity:.25}
+.sp-src .sp-dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.7}
+.sp-src.loading .sp-dot{animation:sp-pulse .8s ease-in-out infinite}
+@keyframes sp-pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
 .main{max-width:1680px;margin:0 auto;padding:10px 24px 80px}
 .grid{display:grid;gap:10px}
 .grid.sm{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}.grid.md{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}.grid.lg{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
@@ -495,6 +508,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 <div class="state" id="stE"><span class="state-i">🔍</span><h3>Search for CC-licensed images</h3><p>Type a name or topic. Images from all sources appear here, ready to download resized with credit auto-copied.</p><div class="hint"><kbd>Enter</kbd> search · <kbd>Ctrl+K</kbd> focus · <kbd>←→</kbd> navigate · <kbd>D</kbd> download · <kbd>C</kbd> credit</div></div>
 <div class="state" id="stL" style="display:none"><div class="spin"></div><h3>Searching all sources...</h3></div>
 <div class="state" id="stN" style="display:none"><span class="state-i">😕</span><h3>No results found</h3><p>Try different terms or enable more sources.</p></div>
+<div id="srcProg" style="display:none"><div id="srcProgTrack"><div id="srcProgFill"></div></div><div id="srcProgSrcs"><span id="srcProgLbl"></span></div></div>
 <div class="grid md" id="grid" style="display:none"></div>
 <div class="lmw" id="lmW" style="display:none"><button class="lmb" id="lmB" onclick="loadMore()">Load More Results</button></div>
 </div>
@@ -797,7 +811,10 @@ async function fetchWHSitemap(){if(whCache)return whCache;const sUrl='https://ww
 async function srcWH(q,pg,pp){try{const all=await fetchWHSitemap();const ql=q.toLowerCase();const matched=all.filter(i=>i.title.toLowerCase().includes(ql));return matched.slice((pg-1)*pp,pg*pp)}catch(e){console.warn('WH:',e);return[]}}
 
 function _srcDefs(q,pg,c,pp){return[['whitehouse',()=>srcWH(q,pg,pp)],['openverse',()=>srcOV(q,pg,pp)],['wikimedia',()=>srcWC(q,pg,pp)],['flickr',()=>srcFL(q,c.flickr,pg,pp)],['unsplash',()=>srcUN(q,c.unsplash,pg,pp)],['pixabay',()=>srcPX(q,c.pixabay,pg,pp)],['pexels',()=>srcPE(q,c.pexels,pg,pp)]]}
-async function doSearch(){const q=$('sIn').value.trim();if(!q)return;clSg();const srcs=[...document.querySelectorAll('.chip.on:not(.chip-all)')].map(c=>c.dataset.src);if(!srcs.length)return toast('Enable a source','err');cQ=q;cPg=1;R=[];wcCont=null;clrSel();kbI=-1;setSt('loading');$('sBtn').disabled=true;rsCn();addSH(q);clSH();const c=G(),pp=c.pp||24;const defs=_srcDefs(q,1,c,pp);const buckets=defs.map(()=>[]);let shown=false;const promises=defs.map(([s,fn],i)=>{if(!srcs.includes(s))return Promise.resolve();return fn().then(res=>{buckets[i]=res;R=buckets.flat();if(!R.length)return;upCn();if(!shown){shown=true;setSt('grid');$('lmW').style.display='block';}render()}).catch(()=>{})});await Promise.allSettled(promises);$('sBtn').disabled=false;if(!R.length)setSt('noResults');}
+function _progShow(defs,srcs){const el=$('srcProg');el.style.display='';el.className='';$('srcProgFill').style.width='0%';const srcColors={whitehouse:'var(--src-wh)',openverse:'var(--src-ov)',wikimedia:'var(--src-wc)',flickr:'var(--src-fl)',unsplash:'var(--src-un)',pixabay:'var(--src-px)',pexels:'var(--src-pe)'};const names={whitehouse:'White House',openverse:'Openverse',wikimedia:'Wikimedia',flickr:'Flickr',unsplash:'Unsplash',pixabay:'Pixabay',pexels:'Pexels'};$('srcProgSrcs').innerHTML=defs.map(([s])=>`<span class="sp-src${srcs.includes(s)?' loading':' skip'}" data-sp="${s}" style="${srcs.includes(s)?`color:${srcColors[s]||'var(--t3)'}`:''}">${srcs.includes(s)?`<span class="sp-dot"></span>`:''}${names[s]||s}</span>`).join('')+`<span id="srcProgLbl"></span>`;}
+function _progTick(s,done,total){const pill=document.querySelector(`.sp-src[data-sp="${s}"]`);if(pill){pill.classList.remove('loading');pill.classList.add('done');pill.innerHTML=`✓ ${pill.textContent.replace(/^✓\s*/,'')}`;}$('srcProgFill').style.width=Math.round(done/total*100)+'%';$('srcProgLbl').textContent=`${done} / ${total}`;}
+function _progDone(){setTimeout(()=>{const el=$('srcProg');if(el)el.classList.add('done');setTimeout(()=>{if(el)el.style.display='none';},500);},800);}
+async function doSearch(){const q=$('sIn').value.trim();if(!q)return;clSg();const srcs=[...document.querySelectorAll('.chip.on:not(.chip-all)')].map(c=>c.dataset.src);if(!srcs.length)return toast('Enable a source','err');cQ=q;cPg=1;R=[];wcCont=null;clrSel();kbI=-1;setSt('loading');$('sBtn').disabled=true;rsCn();addSH(q);clSH();const c=G(),pp=c.pp||24;const defs=_srcDefs(q,1,c,pp);const buckets=defs.map(()=>[]);let shown=false;const activeTotal=defs.filter(([s])=>srcs.includes(s)).length;let activeDone=0;_progShow(defs,srcs);const promises=defs.map(([s,fn],i)=>{if(!srcs.includes(s))return Promise.resolve();return fn().then(res=>{buckets[i]=res;R=buckets.flat();activeDone++;_progTick(s,activeDone,activeTotal);if(!R.length)return;upCn();if(!shown){shown=true;setSt('grid');$('lmW').style.display='block';}render()}).catch(()=>{activeDone++;_progTick(s,activeDone,activeTotal);})});await Promise.allSettled(promises);_progDone();$('sBtn').disabled=false;if(!R.length)setSt('noResults');}
 async function loadMore(){cPg++;$('lmB').disabled=true;$('lmB').textContent='Loading...';const c=G(),pp=c.pp||24,srcs=[...document.querySelectorAll('.chip.on:not(.chip-all)')].map(ch=>ch.dataset.src);const defs=_srcDefs(cQ,cPg,c,pp);const res=await Promise.allSettled(defs.map(([s,fn])=>srcs.includes(s)?fn():Promise.resolve([])));let n=0;for(const r of res)if(r.status==='fulfilled'&&r.value.length){R.push(...r.value);n+=r.value.length;}upCn();render();$('lmB').disabled=false;$('lmB').textContent=n?'Load More Results':'No more';if(!n)$('lmB').disabled=true}
 function rsCn(){['openverse','wikimedia','flickr','unsplash','pixabay','pexels','whitehouse'].forEach(s=>$('cnt-'+s).textContent='')}
 function upCn(){const cn={};R.forEach(r=>{const s=r.src.toLowerCase();cn[s]=(cn[s]||0)+1});for(const[s,n]of Object.entries(cn)){const e=$('cnt-'+s);if(e)e.textContent=n}$('tCnt').textContent=R.length;$('tStats').style.display='flex'}
