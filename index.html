@@ -1090,7 +1090,7 @@ function fltAuthRender(q){
   const list=ql?_authAll.filter(a=>a.name.toLowerCase().includes(ql)):_authAll;
   if(!list.length){drop.innerHTML='<div class="flt-auth-drop-hdr">'+(_authAll.length?'No match':'Search first to see creators')+'</div><div class="flt-auth-none">'+(ql?'Try a different name':'Run a search to populate this list')+'</div>';return;}
   drop.innerHTML='<div class="flt-auth-drop-hdr">'+list.length+' creator'+(list.length!==1?'s':'')+(_authAll.length!==list.length?' of '+_authAll.length:'')+'</div>'+
-    list.map(a=>{const on=FLT.authors.includes(a.name);return`<div class="flt-auth-item${on?' on':''}" onclick="tgAuth(${JSON.stringify(a.name)})"><span class="flt-auth-check">${on?'✓':''}</span><span style="overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0">${esc(a.name)}</span><span class="flt-auth-count">${a.count}</span></div>`}).join('');
+    list.map(a=>{const on=FLT.authors.includes(a.name);return`<div class="flt-auth-item${on?' on':''}" data-auth="${esc(a.name)}" onclick="tgAuth(this.dataset.auth)"><span class="flt-auth-check">${on?'✓':''}</span><span style="overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0">${esc(a.name)}</span><span class="flt-auth-count">${a.count}</span></div>`}).join('');
 }
 function tgAuth(name){
   const idx=FLT.authors.indexOf(name);
@@ -1099,7 +1099,7 @@ function tgAuth(name){
 }
 function upAuthTags(){
   const tags=$('fltAuthTags');if(!tags)return;
-  tags.innerHTML=FLT.authors.map(n=>`<span class="flt-auth-tag"><span>${esc(n)}</span><button onclick="tgAuth(${JSON.stringify(n)})" title="Remove">×</button></span>`).join('');
+  tags.innerHTML=FLT.authors.map(n=>`<span class="flt-auth-tag"><span>${esc(n)}</span><button data-auth="${esc(n)}" onclick="tgAuth(this.dataset.auth)" title="Remove">×</button></span>`).join('');
   const inp=$('fltAuthInp');if(inp)inp.placeholder=FLT.authors.length?'Add more…':'Filter by creator…';
 }
 
@@ -1108,18 +1108,24 @@ const _licLabels={all:'All',pd:'Public Domain',free:'Free Use',by:'CC Attributio
 const _orLabels={all:'All',landscape:'Landscape',portrait:'Portrait',square:'Square'};
 
 function posDD(panel,anchorEl){
-  // Step 1: anchor position
-  const rect=anchorEl.getBoundingClientRect();
-  panel.style.top=(rect.bottom+5)+'px';
-  panel.style.left=rect.left+'px';
+  // getBoundingClientRect() returns VISUAL pixels.
+  // position:fixed coords are CSS layout pixels.
+  // body{zoom:var(--fs)} scales both the layout AND visual viewport,
+  // so we must divide by zoom to convert visual→CSS coords.
+  const zoom=parseFloat(getComputedStyle(document.body).zoom)||1;
+  const r=anchorEl.getBoundingClientRect();
+  panel.style.left=(r.left/zoom)+'px';
+  panel.style.top=(r.bottom/zoom+4)+'px';
   panel.style.right='auto';
-  // Step 2: after browser has rendered the panel at that position, nudge if overflowing
+  // After the panel renders at that position, check for visual overflow and nudge.
+  // Use getBoundingClientRect on the panel (visual pixels) vs window dimensions (visual pixels).
   requestAnimationFrame(()=>{
     const pr=panel.getBoundingClientRect();
-    if(pr.right>window.innerWidth-6)panel.style.left=Math.max(4,window.innerWidth-pr.width-6)+'px';
-    if(pr.bottom>window.innerHeight-6){
-      const ar=anchorEl.getBoundingClientRect();
-      panel.style.top=Math.max(4,ar.top-pr.height-5)+'px';
+    if(pr.right>window.innerWidth-4){
+      panel.style.left=Math.max(4,(window.innerWidth-pr.width-4)/zoom)+'px';
+    }
+    if(pr.bottom>window.innerHeight-4){
+      panel.style.top=Math.max(4,(r.top-pr.height-4)/zoom)+'px';
     }
   });
 }
